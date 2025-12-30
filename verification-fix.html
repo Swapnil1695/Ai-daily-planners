@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- AD SENSE VERIFICATION FIX FOR GITHUB PAGES -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 🔥 CRITICAL: Add BOTH meta tags -->
+    <meta name="google-adsense-account" content="ca-pub-9991916363065932">
+    <meta name="google-site-verification" content="ADD_YOUR_SEARCH_CONSOLE_CODE_HERE">
+    
+    <!-- 🔥 CRITICAL: Add this link tag -->
+    <link rel="canonical" href="https://yourusername.github.io/ai-daily-planner/">
+    
+    <!-- AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"></script>
+    
+    <title>AdSense Verification Fix</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        header { text-align: center; margin-bottom: 40px; }
+        h1 { margin-bottom: 20px; font-size: 32px; }
+        .step { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin: 25px 0; border-left: 5px solid #3498db; }
+        .step-number { background: #3498db; color: white; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px; font-weight: bold; }
+        .code-block { background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 8px; margin: 15px 0; font-family: monospace; overflow-x: auto; }
+        .success { background: rgba(46, 204, 113, 0.2); border-left-color: #2ecc71; }
+        .warning { background: rgba(241, 196, 15, 0.2); border-left-color: #f1c40f; }
+        .btn { background: white; color: #667eea; padding: 12px 30px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin: 10px; display: inline-block; text-decoration: none; }
+        .test-links { margin: 30px 0; }
+        .test-links a { color: #3498db; text-decoration: none; margin: 0 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 AdSense Verification FIX for GitHub Pages</h1>
+            <p>Complete solution for "Couldn't verify your site" error</p>
+        </header>
+        
+        <div class="step success">
+            <h3><span class="step-number">1</span> VERIFICATION STATUS</h3>
+            <p><strong>Current Error:</strong> "Couldn't verify your site"</p>
+            <p><strong>Reason:</strong> GitHub Pages blocks some AdSense crawlers</p>
+            <p><strong>Solution:</strong> Force crawler access with proper headers</p>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">2</span> COPY THIS EXACT CODE to ALL HTML files</h3>
+            <p>Add this to EVERY HTML file in the <code>&lt;head&gt;</code> section:</p>
+            
+            <div class="code-block">
+&lt;!-- AD SENSE VERIFICATION FIX --&gt;
+&lt;meta name="google-adsense-account" content="ca-pub-9991916363065932"&gt;
+&lt;meta name="google-site-verification" content="<strong>YOUR_SEARCH_CONSOLE_CODE</strong>"&gt;
+&lt;link rel="canonical" href="https://<strong>yourusername</strong>.github.io/ai-daily-planner/"&gt;
+&lt;script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"&gt;&lt;/script&gt;
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">3</span> CREATE THESE FILES in GitHub Root</h3>
+            
+            <h4>File 1: <code>ads.txt</code></h4>
+            <div class="code-block">
+google.com, pub-9991916363065932, DIRECT, f08c47fec0942fa0
+            </div>
+            
+            <h4>File 2: <code>.nojekyll</code> (empty file)</h4>
+            <p>Just create file with this name, no content inside</p>
+            
+            <h4>File 3: <code>CNAME</code> (if using custom domain)</h4>
+            <div class="code-block">
+yourdomain.com
+            </div>
+        </div>
+        
+        <div class="step warning">
+            <h3><span class="step-number">4</span> 🔥 CRITICAL FIX: GitHub Pages Configuration</h3>
+            <p>Add this to your repository's <code>_config.yml</code> (create if doesn't exist):</p>
+            
+            <div class="code-block">
+# _config.yml
+title: AI Daily Planner
+description: AI-powered daily planner with AdSense
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://yourusername.github.io" # the base hostname & protocol for your site
+
+# AdSense configuration
+google_adsense: ca-pub-9991916363065932
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Custom headers for AdSense crawler
+include:
+  - .nojekyll
+  - ads.txt
+  - CNAME
+
+# Force HTTPS
+enforce_ssl: yourusername.github.io
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">5</span> TEST YOUR SITE ACCESSIBILITY</h3>
+            
+            <div class="test-links">
+                <a href="https://yourusername.github.io/ai-daily-planner/robots.txt" target="_blank">Test robots.txt</a>
+                <a href="https://yourusername.github.io/ai-daily-planner/sitemap.xml" target="_blank">Test sitemap.xml</a>
+                <a href="https://yourusername.github.io/ai-daily-planner/ads.txt" target="_blank">Test ads.txt</a>
+                <a href="https://search.google.com/test/mobile-friendly?url=https://yourusername.github.io/ai-daily-planner/" target="_blank">Mobile Test</a>
+            </div>
+            
+            <p>All these should return content (not 404)</p>
+        </div>
+        
+        <div class="step success">
+            <h3><span class="step-number">6</span> RE-SUBMIT TO AdSense</h3>
+            <p>After implementing all fixes:</p>
+            <ol>
+                <li>Wait 24 hours</li>
+                <li>Go to AdSense → Sites</li>
+                <li>Remove old site entry</li>
+                <li>Add new site with exact URL</li>
+                <li>Use <strong>HTML tag verification</strong> method</li>
+                <li>Copy the meta tag they give you</li>
+                <li>Add it to ALL HTML files</li>
+                <li>Click verify</li>
+            </ol>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="btn">← Back to Home</a>
+            <a href="https://ads.google.com" target="_blank" class="btn">Go to AdSense</a>
+            <a href="https://search.google.com/search-console" target="_blank" class="btn">Go to Search Console</a>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-check for AdSense script
+        document.addEventListener('DOMContentLoaded', function() {
+            const hasAdSense = document.querySelector('script[src*="adsbygoogle"]');
+            const status = document.getElementById('adsense-status');
+            
+            if (hasAdSense) {
+                status.innerHTML = '✅ AdSense script is loaded';
+                status.style.color = '#2ecc71';
+            } else {
+                status.innerHTML = '❌ AdSense script NOT found';
+                status.style.color = '#e74c3c';
+            }
+        });
+    </script>
+</body>
+</html>
