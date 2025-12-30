@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Daily Planner - Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>AI Daily Planner</h1>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="tasks.html"><i class="fas fa-tasks"></i> Tasks</a></li>
+                <li><a href="focus.html"><i class="fas fa-bullseye"></i> Focus</a></li>
+                <li><a href="habits.html"><i class="fas fa-chart-line"></i> Habits</a></li>
+                <li><a href="notes.html" class="active"><i class="fas fa-sticky-note"></i> Notes</a></li>
+                <li><a href="analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="premium.html"><i class="fas fa-crown"></i> Premium</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            
+            <!-- Sidebar Ad -->
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+                <div class="ad-content">
+                    <i class="fas fa-ad"></i>
+                    <p>Note-Taking Mastery<br>Organize your thoughts effectively</p>
+                    <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h2><i class="fas fa-sticky-note"></i> Notes & Ideas</h2>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=3498db&color=fff" alt="User">
+                    <div>
+                        <h4>Alex Johnson</h4>
+                        <p>Total Notes: 47</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Create New Note -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-edit"></i> Create New Note</h3>
+                    <button class="btn" id="save-note">
+                        <i class="fas fa-save"></i> Save Note
+                    </button>
+                </div>
+                
+                <div class="input-group">
+                    <label for="note-title"><i class="fas fa-heading"></i> Note Title</label>
+                    <input type="text" id="note-title" placeholder="Enter note title">
+                </div>
+                
+                <div class="input-group">
+                    <label for="note-content"><i class="fas fa-align-left"></i> Content</label>
+                    <textarea id="note-content" rows="10" placeholder="Start typing your note here..."></textarea>
+                </div>
+                
+                <div style="display: flex; gap: 20px; margin-top: 20px;">
+                    <div class="input-group" style="flex: 1;">
+                        <label for="note-category"><i class="fas fa-folder"></i> Category</label>
+                        <select id="note-category">
+                            <option>Personal</option>
+                            <option>Work</option>
+                            <option>Ideas</option>
+                            <option>Meeting Notes</option>
+                            <option>Learning</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group" style="flex: 1;">
+                        <label for="note-tags"><i class="fas fa-tags"></i> Tags (comma separated)</label>
+                        <input type="text" id="note-tags" placeholder="e.g. project, meeting, ideas">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI Notes Assistant -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-robot"></i> AI Notes Assistant</h3>
+                    <button class="btn btn-secondary" id="ai-summarize">
+                        <i class="fas fa-file-contract"></i> Summarize
+                    </button>
+                </div>
+                
+                <div class="dashboard">
+                    <div class="dashboard-card">
+                        <h4><i class="fas fa-magic"></i> Quick Actions</h4>
+                        <ul class="schedule-list">
+                            <li><button class="btn" style="width: 100%; margin-bottom: 10px;" id="action-todo">Convert to To-Do List</button></li>
+                            <li><button class="btn btn-secondary" style="width: 100%; margin-bottom: 10px;" id="action-meeting">Meeting Notes Template</button></li>
+                            <li><button class="btn btn-secondary" style="width: 100%;" id="action-brainstorm">Brainstorming Template</button></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h4><i class="fas fa-lightbulb"></i> AI Suggestions</h4>
+                        <ul class="schedule-list">
+                            <li><i class="fas fa-check-circle" style="color: #2ecc71;"></i> Your notes about "Project X" could use more details</li>
+                            <li><i class="fas fa-exclamation-triangle" style="color: #e74c3c;"></i> You have 5 unsorted notes - consider organizing</li>
+                            <li><i class="fas fa-check-circle" style="color: #2ecc71;"></i> Great detail in yesterday's meeting notes</li>
+                            <li><i class="fas fa-check-circle" style="color: #2ecc71;"></i> Try adding tags to older notes for better search</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ads Section -->
+            <div class="ads-section">
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-book-open"></i>
+                        <p>Note-Taking Systems<br>Learn Zettelkasten & Second Brain</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+                
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-pen-fancy"></i>
+                        <p>Digital Notebooks<br>Sync notes across all your devices</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Notes -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-history"></i> Recent Notes</h3>
+                    <button class="btn btn-secondary" id="view-all">
+                        <i class="fas fa-list"></i> View All
+                    </button>
+                </div>
+                
+                <div class="notes-grid" id="notes-grid">
+                    <!-- Notes will be dynamically added here -->
+                    <div class="note-card" style="background-color: #fff9c4;">
+                        <h5>Project Kickoff Meeting</h5>
+                        <div class="note-content">
+                            Discussed timeline, deliverables, and team roles. Need to follow up with design team.
+                        </div>
+                        <div class="note-date">
+                            May 14, 2023 • Work
+                        </div>
+                    </div>
+                    
+                    <div class="note-card" style="background-color: #e3f2fd;">
+                        <h5>Book Recommendations</h5>
+                        <div class="note-content">
+                            Deep Work by Cal Newport, Atomic Habits by James Clear, The One Thing by Gary Keller
+                        </div>
+                        <div class="note-date">
+                            May 12, 2023 • Personal
+                        </div>
+                    </div>
+                    
+                    <div class="note-card" style="background-color: #f3e5f5;">
+                        <h5>Weekend Trip Ideas</h5>
+                        <div class="note-content">
+                            Hiking at Blue Ridge Mountains, Beach camping, City museum tour
+                        </div>
+                        <div class="note-date">
+                            May 10, 2023 • Personal
+                        </div>
+                    </div>
+                    
+                    <div class="note-card" style="background-color: #e8f5e9;">
+                        <h5>Learning Goals Q2</h5>
+                        <div class="note-content">
+                            Complete React course, Learn TypeScript basics, Practice system design
+                        </div>
+                        <div class="note-date">
+                            May 8, 2023 • Learning
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>AI Daily Planner &copy; 2023 | Using Ad ID: google.com, pub-9991916363065932, DIRECT, f08c47fec0942fa0</p>
+                <p>Capture your thoughts, ideas, and important information with AI-powered organization.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Save note functionality
+        document.getElementById('save-note').addEventListener('click', function() {
+            const title = document.getElementById('note-title').value;
+            const content = document.getElementById('note-content').value;
+            const category = document.getElementById('note-category').value;
+            
+            if (!title || !content) {
+                alert('Please enter both title and content');
+                return;
+            }
+            
+            // In a real app, this would save to backend
+            // For demo, we'll add to the notes grid
+            const notesGrid = document.getElementById('notes-grid');
+            const noteCard = document.createElement('div');
+            noteCard.className = 'note-card';
+            
+            // Different colors based on category
+            const colors = {
+                'Personal': '#e3f2fd',
+                'Work': '#fff9c4',
+                'Ideas': '#f3e5f5',
+                'Meeting Notes': '#e8f5e9',
+                'Learning': '#ffebee',
+                'Other': '#f5f5f5'
+            };
+            
+            noteCard.style.backgroundColor = colors[category] || '#f5f5f5';
+            noteCard.innerHTML = `
+                <h5>${title}</h5>
+                <div class="note-content">
+                    ${content.substring(0, 100)}${content.length > 100 ? '...' : ''}
+                </div>
+                <div class="note-date">
+                    Today • ${category}
+                </div>
+            `;
+            
+            // Add to the beginning
+            notesGrid.insertBefore(noteCard, notesGrid.firstChild);
+            
+            // Reset form
+            document.getElementById('note-title').value = '';
+            document.getElementById('note-content').value = '';
+            document.getElementById('note-tags').value = '';
+            
+            alert('Note saved successfully!');
+        });
+        
+        // AI actions
+        document.getElementById('ai-summarize').addEventListener('click', function() {
+            const content = document.getElementById('note-content').value;
+            if (content) {
+                alert('AI Summary: This note discusses important points that need follow-up. Key themes include project planning and team coordination.');
+            } else {
+                alert('Please enter some content to summarize');
+            }
+        });
+        
+        document.getElementById('action-todo').addEventListener('click', function() {
+            document.getElementById('note-content').value = "- [ ] Task 1\n- [ ] Task 2\n- [ ] Task 3\n- [ ] Task 4";
+            alert('To-do list template added!');
+        });
+        
+        document.getElementById('action-meeting').addEventListener('click', function() {
+            document.getElementById('note-content').value = "Meeting: \nDate: \nAttendees: \n\nAgenda:\n1. \n2. \n3. \n\nAction Items:\n- \n- \n- \n\nNotes:\n";
+            alert('Meeting notes template added!');
+        });
+        
+        document.getElementById('action-brainstorm').addEventListener('click', function() {
+            document.getElementById('note-content').value = "Topic: \n\nIdeas:\n1. \n2. \n3. \n\nPros & Cons:\n\nNext Steps:";
+            alert('Brainstorming template added!');
+        });
+        
+        // Initialize with sample data
+        window.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('note-title').value = 'Weekly Review Notes';
+            document.getElementById('note-content').value = 'This week was productive. Completed project milestones ahead of schedule. Need to improve time blocking for deep work.';
+            document.getElementById('note-tags').value = 'review, weekly, productivity';
+        });
+    </script>
+<!-- Add these scripts in order -->
+<script src="auth-manager.js"></script>
+<script src="common-header.js"></script>
+<script src="navigation.js"></script>
+
+<script>
+    // Initialize page-specific functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check authentication state
+        const user = window.authManager?.getCurrentUser();
+        
+        if (!user && !window.location.pathname.includes('index.html') && 
+            !window.location.pathname.includes('login.html') && 
+            !window.location.pathname.includes('signup.html')) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        // Initialize page-specific functionality
+        initPageSpecificFunctionality();
+    });
+    
+    function initPageSpecificFunctionality() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        switch(currentPage) {
+            case 'dashboard.html':
+                initDashboard();
+                break;
+            case 'tasks.html':
+                initTasks();
+                break;
+            case 'focus.html':
+                initFocus();
+                break;
+            case 'habits.html':
+                initHabits();
+                break;
+            case 'notes.html':
+                initNotes();
+                break;
+            case 'analytics.html':
+                initAnalytics();
+                break;
+            case 'profile.html':
+                initProfile();
+                break;
+            case 'settings.html':
+                initSettings();
+                break;
+            default:
+                // No specific initialization needed
+        }
+    }
+    
+    // Page-specific initialization functions
+    function initDashboard() {
+        // Dashboard specific initialization
+        console.log('Initializing dashboard...');
+    }
+    
+    function initTasks() {
+        // Tasks specific initialization
+        console.log('Initializing tasks...');
+    }
+    
+    function initFocus() {
+        // Focus specific initialization
+        console.log('Initializing focus...');
+    }
+    
+    function initHabits() {
+        // Habits specific initialization
+        console.log('Initializing habits...');
+    }
+    
+    function initNotes() {
+        // Notes specific initialization
+        console.log('Initializing notes...');
+    }
+    
+    function initAnalytics() {
+        // Analytics specific initialization
+        console.log('Initializing analytics...');
+    }
+    
+    function initProfile() {
+        // Profile specific initialization
+        const user = window.authManager?.getCurrentUser();
+        if (!user) return;
+        
+        // Populate profile form
+        document.getElementById('profile-name')?.value = user.displayName || '';
+        document.getElementById('profile-email')?.value = user.email || '';
+        
+        // Set up profile update form
+        const profileForm = document.getElementById('profile-form');
+        if (profileForm) {
+            profileForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('profile-name').value;
+                const email = document.getElementById('profile-email').value;
+                
+                try {
+                    await window.authManager.updateUserProfile({
+                        displayName: name
+                    });
+                    
+                    alert('Profile updated successfully!');
+                } catch (error) {
+                    alert('Error updating profile: ' + error);
+                }
+            });
+        }
+    }
+    
+    function initSettings() {
+        // Settings specific initialization
+        console.log('Initializing settings...');
+    }
+</script>
+</body>
+</html>

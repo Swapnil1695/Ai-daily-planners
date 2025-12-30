@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Daily Planner - Tasks</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>AI Daily Planner</h1>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="tasks.html" class="active"><i class="fas fa-tasks"></i> Tasks</a></li>
+                <li><a href="focus.html"><i class="fas fa-bullseye"></i> Focus</a></li>
+                <li><a href="habits.html"><i class="fas fa-chart-line"></i> Habits</a></li>
+                <li><a href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a></li>
+                <li><a href="analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="premium.html"><i class="fas fa-crown"></i> Premium</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            
+            <!-- Sidebar Ad -->
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+                <div class="ad-content">
+                    <i class="fas fa-ad"></i>
+                    <p>AI Productivity Tools<br>Boost your efficiency by 40%</p>
+                    <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h2><i class="fas fa-tasks"></i> Daily Tasks & Schedule</h2>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=3498db&color=fff" alt="User">
+                    <div>
+                        <h4>Alex Johnson</h4>
+                        <p>Today: May 15, 2023</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Generate Schedule Section -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3>Generate Your Daily Schedule</h3>
+                    <button class="btn" id="generate-schedule">
+                        <i class="fas fa-magic"></i> AI Generate
+                    </button>
+                </div>
+                
+                <div class="schedule-inputs" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                    <div class="input-group">
+                        <label for="work-hours"><i class="fas fa-clock"></i> Work Hours</label>
+                        <select id="work-hours">
+                            <option value="9-5">9:00 AM - 5:00 PM</option>
+                            <option value="8-4">8:00 AM - 4:00 PM</option>
+                            <option value="10-6">10:00 AM - 6:00 PM</option>
+                            <option value="flexible">Flexible Schedule</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="focus-area"><i class="fas fa-bullseye"></i> Focus Area</label>
+                        <select id="focus-area">
+                            <option value="work">Work/Professional</option>
+                            <option value="study">Study/Learning</option>
+                            <option value="fitness">Health & Fitness</option>
+                            <option value="creative">Creative Projects</option>
+                            <option value="balanced">Balanced Lifestyle</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="energy-level"><i class="fas fa-battery-full"></i> Energy Level</label>
+                        <select id="energy-level">
+                            <option value="high">High Energy</option>
+                            <option value="medium">Medium Energy</option>
+                            <option value="low">Low Energy</option>
+                            <option value="varies">Varies Throughout Day</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="tasks"><i class="fas fa-tasks"></i> Key Tasks (comma separated)</label>
+                        <input type="text" id="tasks" placeholder="e.g. Finish report, Gym, Team meeting">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="additional-notes"><i class="fas fa-sticky-note"></i> Additional Notes</label>
+                    <textarea id="additional-notes" placeholder="Any specific requirements or constraints for your day..."></textarea>
+                </div>
+            </div>
+            
+            <!-- Ads Section -->
+            <div class="ads-section">
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-graduation-cap"></i>
+                        <p>Master AI Productivity<br>Online Course - 50% Off Today</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+                
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-calendar-alt"></i>
+                        <p>Advanced Scheduling Tools<br>Try Premium Features Free for 30 Days</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Today's Schedule -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-calendar-day"></i> Today's Schedule</h3>
+                    <div>
+                        <button class="btn btn-secondary" id="clear-tasks">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                        <button class="btn" id="add-task">
+                            <i class="fas fa-plus"></i> Add Task
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="schedule-list">
+                    <!-- Tasks will be dynamically added here -->
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-content">
+                            <h5>Morning Routine & Breakfast</h5>
+                            <p>Wake up, hydrate, light exercise, and healthy breakfast</p>
+                        </div>
+                        <div class="task-actions">
+                            <button><i class="fas fa-edit"></i></button>
+                            <button><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-content">
+                            <h5>Deep Work Session</h5>
+                            <p>Focus on project work without interruptions (2 hours)</p>
+                        </div>
+                        <div class="task-actions">
+                            <button><i class="fas fa-edit"></i></button>
+                            <button><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-content">
+                            <h5>Team Meeting</h5>
+                            <p>Weekly sync with development team</p>
+                        </div>
+                        <div class="task-actions">
+                            <button><i class="fas fa-edit"></i></button>
+                            <button><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-content">
+                            <h5>Lunch Break</h5>
+                            <p>Step away from work, mindful eating</p>
+                        </div>
+                        <div class="task-actions">
+                            <button><i class="fas fa-edit"></i></button>
+                            <button><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-content">
+                            <h5>Creative Work</h5>
+                            <p>Brainstorming and planning for new project</p>
+                        </div>
+                        <div class="task-actions">
+                            <button><i class="fas fa-edit"></i></button>
+                            <button><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>AI Daily Planner &copy; 2023 | Using Ad ID: google.com, pub-9991916363065932, DIRECT, f08c47fec0942fa0</p>
+                <p>This is a demonstration interface. Actual AI integration would require backend implementation.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Generate schedule functionality
+        document.getElementById('generate-schedule').addEventListener('click', function() {
+            const focusArea = document.getElementById('focus-area').value;
+            const workHours = document.getElementById('work-hours').value;
+            const tasks = document.getElementById('tasks').value;
+            
+            alert(`AI schedule generated for ${focusArea} focus with ${workHours} work hours!`);
+            
+            // In a real app, this would call an AI API to generate schedule
+            // For demo, we'll just add a sample task
+            if (tasks.trim()) {
+                const taskList = document.getElementById('schedule-list');
+                const newTask = document.createElement('div');
+                newTask.className = 'task-item';
+                newTask.innerHTML = `
+                    <input type="checkbox" class="task-checkbox">
+                    <div class="task-content">
+                        <h5>${tasks.split(',')[0] || 'New Task'}</h5>
+                        <p>AI-generated task based on your preferences</p>
+                    </div>
+                    <div class="task-actions">
+                        <button><i class="fas fa-edit"></i></button>
+                        <button><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                taskList.appendChild(newTask);
+            }
+        });
+        
+        // Add task functionality
+        document.getElementById('add-task').addEventListener('click', function() {
+            const taskName = prompt('Enter task name:');
+            if (taskName) {
+                const taskList = document.getElementById('schedule-list');
+                const newTask = document.createElement('div');
+                newTask.className = 'task-item';
+                newTask.innerHTML = `
+                    <input type="checkbox" class="task-checkbox">
+                    <div class="task-content">
+                        <h5>${taskName}</h5>
+                        <p>Manually added task</p>
+                    </div>
+                    <div class="task-actions">
+                        <button><i class="fas fa-edit"></i></button>
+                        <button><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                taskList.appendChild(newTask);
+            }
+        });
+        
+        // Clear all tasks
+        document.getElementById('clear-tasks').addEventListener('click', function() {
+            if (confirm('Are you sure you want to clear all tasks?')) {
+                document.getElementById('schedule-list').innerHTML = '';
+            }
+        });
+        
+        // Initialize with sample data
+        window.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('tasks').value = "Finish quarterly report, Team sync, Gym session";
+            document.getElementById('additional-notes').value = "Need to leave by 6 PM for dinner plans";
+        });
+    </script>
+<!-- Add these scripts in order -->
+<script src="auth-manager.js"></script>
+<script src="common-header.js"></script>
+<script src="navigation.js"></script>
+
+<script>
+    // Initialize page-specific functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check authentication state
+        const user = window.authManager?.getCurrentUser();
+        
+        if (!user && !window.location.pathname.includes('index.html') && 
+            !window.location.pathname.includes('login.html') && 
+            !window.location.pathname.includes('signup.html')) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        // Initialize page-specific functionality
+        initPageSpecificFunctionality();
+    });
+    
+    function initPageSpecificFunctionality() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        switch(currentPage) {
+            case 'dashboard.html':
+                initDashboard();
+                break;
+            case 'tasks.html':
+                initTasks();
+                break;
+            case 'focus.html':
+                initFocus();
+                break;
+            case 'habits.html':
+                initHabits();
+                break;
+            case 'notes.html':
+                initNotes();
+                break;
+            case 'analytics.html':
+                initAnalytics();
+                break;
+            case 'profile.html':
+                initProfile();
+                break;
+            case 'settings.html':
+                initSettings();
+                break;
+            default:
+                // No specific initialization needed
+        }
+    }
+    
+    // Page-specific initialization functions
+    function initDashboard() {
+        // Dashboard specific initialization
+        console.log('Initializing dashboard...');
+    }
+    
+    function initTasks() {
+        // Tasks specific initialization
+        console.log('Initializing tasks...');
+    }
+    
+    function initFocus() {
+        // Focus specific initialization
+        console.log('Initializing focus...');
+    }
+    
+    function initHabits() {
+        // Habits specific initialization
+        console.log('Initializing habits...');
+    }
+    
+    function initNotes() {
+        // Notes specific initialization
+        console.log('Initializing notes...');
+    }
+    
+    function initAnalytics() {
+        // Analytics specific initialization
+        console.log('Initializing analytics...');
+    }
+    
+    function initProfile() {
+        // Profile specific initialization
+        const user = window.authManager?.getCurrentUser();
+        if (!user) return;
+        
+        // Populate profile form
+        document.getElementById('profile-name')?.value = user.displayName || '';
+        document.getElementById('profile-email')?.value = user.email || '';
+        
+        // Set up profile update form
+        const profileForm = document.getElementById('profile-form');
+        if (profileForm) {
+            profileForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('profile-name').value;
+                const email = document.getElementById('profile-email').value;
+                
+                try {
+                    await window.authManager.updateUserProfile({
+                        displayName: name
+                    });
+                    
+                    alert('Profile updated successfully!');
+                } catch (error) {
+                    alert('Error updating profile: ' + error);
+                }
+            });
+        }
+    }
+    
+    function initSettings() {
+        // Settings specific initialization
+        console.log('Initializing settings...');
+    }
+</script>
+</body>
+</html>

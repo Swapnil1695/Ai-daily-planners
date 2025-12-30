@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Daily Planner - Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>AI Daily Planner</h1>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="tasks.html"><i class="fas fa-tasks"></i> Tasks</a></li>
+                <li><a href="focus.html"><i class="fas fa-bullseye"></i> Focus</a></li>
+                <li><a href="habits.html"><i class="fas fa-chart-line"></i> Habits</a></li>
+                <li><a href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a></li>
+                <li><a href="analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="premium.html"><i class="fas fa-crown"></i> Premium</a></li>
+                <li><a href="profile.html" class="active"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            
+            <!-- Sidebar Ad -->
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+                <div class="ad-content">
+                    <i class="fas fa-ad"></i>
+                    <p>Profile Enhancement Tools<br>Customize your experience</p>
+                    <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h2><i class="fas fa-user"></i> My Profile</h2>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=3498db&color=fff" alt="User">
+                    <div>
+                        <h4>Alex Johnson</h4>
+                        <p>Member since March 2023</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile Overview -->
+            <div class="page-section">
+                <div class="profile-header">
+                    <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=3498db&color=fff&size=100" alt="Profile" class="profile-avatar">
+                    <div style="flex: 1;">
+                        <h3 style="margin-bottom: 10px;">Alex Johnson</h3>
+                        <p style="color: #7f8c8d; margin-bottom: 20px;">Product Manager • San Francisco, CA</p>
+                        
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">142</div>
+                                <div class="stat-label">Tasks Completed</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">78%</div>
+                                <div class="stat-label">Avg. Productivity</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">42</div>
+                                <div class="stat-label">Day Streak</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">14</div>
+                                <div class="stat-label">Habits Tracked</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Personal Information -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-info-circle"></i> Personal Information</h3>
+                    <button class="btn btn-secondary" id="update-info">
+                        <i class="fas fa-save"></i> Update
+                    </button>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                    <div class="input-group">
+                        <label for="full-name"><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="full-name" value="Alex Johnson">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="email" value="alex.johnson@example.com">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="location"><i class="fas fa-map-marker-alt"></i> Location</label>
+                        <input type="text" id="location" value="San Francisco, CA">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="timezone"><i class="fas fa-globe"></i> Timezone</label>
+                        <select id="timezone">
+                            <option>Pacific Time (PT)</option>
+                            <option>Eastern Time (ET)</option>
+                            <option>Central Time (CT)</option>
+                            <option>Mountain Time (MT)</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="bio"><i class="fas fa-file-alt"></i> Bio</label>
+                    <textarea id="bio" rows="4">Product manager with passion for productivity tools and AI applications. Love hiking, reading, and coffee.</textarea>
+                </div>
+            </div>
+            
+            <!-- Productivity Preferences -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-cogs"></i> Productivity Preferences</h3>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="dashboard-card">
+                        <h4><i class="fas fa-sun"></i> Daily Rhythm</h4>
+                        <p><strong>Morning Person:</strong> Yes</p>
+                        <p><strong>Peak Hours:</strong> 9 AM - 12 PM</p>
+                        <p><strong>Preferred Work Hours:</strong> 8 AM - 5 PM</p>
+                        <p><strong>Break Frequency:</strong> Every 50 minutes</p>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h4><i class="fas fa-bullseye"></i> Focus Areas</h4>
+                        <ul class="schedule-list">
+                            <li><i class="fas fa-check" style="color: #2ecc71;"></i> Deep Work</li>
+                            <li><i class="fas fa-check" style="color: #2ecc71;"></i> Creative Tasks</li>
+                            <li><i class="fas fa-times" style="color: #e74c3c;"></i> Administrative Work</li>
+                            <li><i class="fas fa-check" style="color: #2ecc71;"></i> Strategic Planning</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h4><i class="fas fa-chart-line"></i> Goals</h4>
+                        <p><strong>Primary Goal:</strong> Improve focus time</p>
+                        <p><strong>Secondary Goal:</strong> Build consistent habits</p>
+                        <p><strong>Weekly Target:</strong> 25 hours of focused work</p>
+                        <p><strong>Monthly Target:</strong> 90% task completion</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ads Section -->
+            <div class="ads-section">
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-user-shield"></i>
+                        <p>Privacy Protection Tools<br>Keep your data safe and secure</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+                
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-users"></i>
+                        <p>Connect with Productivity Community<br>Share tips and get feedback</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Account Settings -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-user-cog"></i> Account Settings</h3>
+                </div>
+                
+                <div class="dashboard" style="grid-template-columns: 1fr;">
+                    <div class="dashboard-card">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h5>Two-Factor Authentication</h5>
+                                <p>Add an extra layer of security to your account</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h5>Email Notifications</h5>
+                                <p>Receive daily summaries and weekly reports</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h5>Data Sharing for AI Improvement</h5>
+                                <p>Help improve AI algorithms (anonymous data only)</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h5>Dark Mode</h5>
+                                <p>Use dark theme across the application</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div style="margin-top: 30px; display: flex; gap: 15px;">
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-download"></i> Export Data
+                            </button>
+                            <button class="btn btn-secondary" style="background-color: #e74c3c;">
+                                <i class="fas fa-trash"></i> Delete Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>AI Daily Planner &copy; 2023 | Using Ad ID: google.com, pub-9991916363065932, DIRECT, f08c47fec0942fa0</p>
+                <p>Manage your profile, preferences, and account settings.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Update info functionality
+        document.getElementById('update-info').addEventListener('click', function() {
+            const name = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            
+            if (!name || !email) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // In a real app, this would save to backend
+            // For demo, we'll just show a message
+            alert('Profile information updated successfully!');
+            
+            // Update the user profile in header
+            document.querySelector('.user-profile h4').textContent = name;
+            document.querySelector('.profile-header h3').textContent = name;
+        });
+        
+        // Export data
+        const exportButton = document.querySelector('.btn .fa-download').parentElement;
+        exportButton.addEventListener('click', function() {
+            alert('Your data export has started. You will receive an email with download link shortly.');
+        });
+        
+        // Delete account
+        const deleteButton = document.querySelector('.btn .fa-trash').parentElement;
+        deleteButton.addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted.')) {
+                alert('Account deletion scheduled. You will receive a confirmation email.');
+            }
+        });
+    </script>
+<!-- Add these scripts in order -->
+<script src="auth-manager.js"></script>
+<script src="common-header.js"></script>
+<script src="navigation.js"></script>
+
+<script>
+    // Initialize page-specific functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check authentication state
+        const user = window.authManager?.getCurrentUser();
+        
+        if (!user && !window.location.pathname.includes('index.html') && 
+            !window.location.pathname.includes('login.html') && 
+            !window.location.pathname.includes('signup.html')) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        // Initialize page-specific functionality
+        initPageSpecificFunctionality();
+    });
+    
+    function initPageSpecificFunctionality() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        switch(currentPage) {
+            case 'dashboard.html':
+                initDashboard();
+                break;
+            case 'tasks.html':
+                initTasks();
+                break;
+            case 'focus.html':
+                initFocus();
+                break;
+            case 'habits.html':
+                initHabits();
+                break;
+            case 'notes.html':
+                initNotes();
+                break;
+            case 'analytics.html':
+                initAnalytics();
+                break;
+            case 'profile.html':
+                initProfile();
+                break;
+            case 'settings.html':
+                initSettings();
+                break;
+            default:
+                // No specific initialization needed
+        }
+    }
+    
+    // Page-specific initialization functions
+    function initDashboard() {
+        // Dashboard specific initialization
+        console.log('Initializing dashboard...');
+    }
+    
+    function initTasks() {
+        // Tasks specific initialization
+        console.log('Initializing tasks...');
+    }
+    
+    function initFocus() {
+        // Focus specific initialization
+        console.log('Initializing focus...');
+    }
+    
+    function initHabits() {
+        // Habits specific initialization
+        console.log('Initializing habits...');
+    }
+    
+    function initNotes() {
+        // Notes specific initialization
+        console.log('Initializing notes...');
+    }
+    
+    function initAnalytics() {
+        // Analytics specific initialization
+        console.log('Initializing analytics...');
+    }
+    
+    function initProfile() {
+        // Profile specific initialization
+        const user = window.authManager?.getCurrentUser();
+        if (!user) return;
+        
+        // Populate profile form
+        document.getElementById('profile-name')?.value = user.displayName || '';
+        document.getElementById('profile-email')?.value = user.email || '';
+        
+        // Set up profile update form
+        const profileForm = document.getElementById('profile-form');
+        if (profileForm) {
+            profileForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('profile-name').value;
+                const email = document.getElementById('profile-email').value;
+                
+                try {
+                    await window.authManager.updateUserProfile({
+                        displayName: name
+                    });
+                    
+                    alert('Profile updated successfully!');
+                } catch (error) {
+                    alert('Error updating profile: ' + error);
+                }
+            });
+        }
+    }
+    
+    function initSettings() {
+        // Settings specific initialization
+        console.log('Initializing settings...');
+    }
+</script>
+</body>
+</html>

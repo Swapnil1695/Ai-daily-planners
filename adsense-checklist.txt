@@ -1,0 +1,78 @@
+====================================================================
+AD SENSE VERIFICATION CHECKLIST - AI DAILY PLANNER
+====================================================================
+
+PUBLISHER ID: ca-pub-9991916363065932
+DOMAIN: [YOUR DOMAIN HERE]
+SUBMISSION DATE: [DATE]
+
+✅ REQUIRED FILES (Must be in root directory):
+1. index.html          - Main landing page
+2. privacy.html        - Privacy policy (MANDATORY)
+3. terms.html          - Terms of service (MANDATORY)
+4. robots.txt          - Crawler instructions
+5. sitemap.xml         - Site structure for crawlers
+6. .htaccess           - Server configuration (if Apache)
+
+✅ AdSense CODE IMPLEMENTATION:
+1. ✅ Meta tag in <head>:
+   <meta name="google-adsense-account" content="ca-pub-9991916363065932">
+
+2. ✅ Script tag in <head>:
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"></script>
+
+3. ✅ Ad units in <body>:
+   Use <ins class="adsbygoogle"> tags with your publisher ID
+
+✅ CONTENT REQUIREMENTS:
+1. ✅ Sufficient text content (500+ words per page)
+2. ✅ Original content (not copied from elsewhere)
+3. ✅ No placeholder/lorem ipsum text
+4. ✅ Proper grammar and spelling
+5. ✅ Clear navigation between pages
+
+✅ TECHNICAL REQUIREMENTS:
+1. ✅ Site must be publicly accessible (not localhost)
+2. ✅ No broken links (404 errors)
+3. ✅ Mobile responsive design
+4. ✅ Fast loading speed
+5. ✅ HTTPS encryption (SSL certificate)
+6. ✅ No pop-ups or intrusive ads
+
+✅ LEGAL REQUIREMENTS:
+1. ✅ Privacy policy with AdSense disclosure
+2. ✅ Terms of service
+3. ✅ Contact information
+4. ✅ Copyright notice
+5. ✅ Age restrictions (13+)
+
+✅ AD PLACEMENT RULES:
+1. ✅ Maximum 3 ad units per page
+2. ✅ Ads clearly labeled as "Advertisement"
+3. ✅ No ads near interactive elements
+4. ✅ No deceptive ad placement
+5. ✅ Respectful ad density
+
+✅ SUBMISSION STEPS:
+1. Complete all files in this package
+2. Upload to your web hosting
+3. Test all links work correctly
+4. Verify AdSense code is working
+5. Submit site via AdSense dashboard
+6. Wait 24-48 hours for review
+
+✅ TROUBLESHOOTING:
+If verification fails, check:
+- Site is not blocked by robots.txt
+- AdSense code is on all pages
+- No console errors in browser
+- Site is indexed by Google (search site:yourdomain.com)
+- Privacy policy mentions AdSense
+
+✅ CONTACT INFORMATION:
+For verification issues, include in AdSense contact:
+- Publisher ID: ca-pub-9991916363065932
+- Domain: [YOUR DOMAIN]
+- Email: [YOUR EMAIL]
+
+====================================================================

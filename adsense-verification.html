@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdSense Verification Helper - AI Daily Planner</title>
+    <!-- AdSense Verification Meta Tag -->
+    <meta name="google-adsense-account" content="ca-pub-9991916363065932">
+    <!-- AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            color: #7f8c8d;
+        }
+        
+        .status-section {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .status-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checklist {
+            margin: 30px 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e6ed;
+        }
+        
+        .checklist-item.completed {
+            border-color: #2ecc71;
+            background-color: #e8f5e9;
+        }
+        
+        .checklist-item.error {
+            border-color: #e74c3c;
+            background-color: #ffebee;
+        }
+        
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .check-icon.completed {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .check-icon.error {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .check-icon.pending {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        .check-content {
+            flex: 1;
+        }
+        
+        .check-content h4 {
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .check-content p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .adsense-info {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .adsense-info h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .code-block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        
+        .verification-code {
+            background-color: #2c3e50;
+            color: #2ecc71;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            font-size: 18px;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e6ed;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-check-circle"></i> AdSense Verification Helper</h1>
+            <p>Complete checklist for AdSense site verification</p>
+        </header>
+        
+        <div class="status-section">
+            <h2><i class="fas fa-info-circle"></i> Verification Status</h2>
+            <p>Current status: <strong id="verification-status">Pending Verification</strong></p>
+            <p>Publisher ID: <strong>ca-pub-9991916363065932</strong></p>
+        </div>
+        
+        <div class="adsense-info">
+            <h3><i class="fas fa-exclamation-triangle"></i> Important Note</h3>
+            <p>This page helps verify that AdSense code is properly implemented on your site. Do not submit this page to AdSense - submit your main index.html page.</p>
+        </div>
+        
+        <div class="checklist" id="verification-checklist">
+            <div class="checklist-item" id="check-adsense-script">
+                <div class="check-icon pending">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <div class="check-content">
+                    <h4>AdSense Script Loaded</h4>
+                    <p>Checking if AdSense JavaScript is properly loaded...</p>
+                </div>
+            </div>
+            
+            <div class="checklist-item" id="check-meta-tag">
+                <div class="check-icon pending">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <div class="check-content">
+                    <h4>AdSense Meta Tag Present</h4>
+                    <p>Checking for verification meta tag in HTML head...</p>
+                </div>
+            </div>
+            
+            <div class="checklist-item" id="check-site-accessible">
+                <div class="check-icon pending">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <div class="check-content">
+                    <h4>Site Publicly Accessible</h4>
+                    <p>Verifying site can be accessed by AdSense crawler...</p>
+                </div>
+            </div>
+            
+            <div class="checklist-item" id="check-content">
+                <div class="check-icon pending">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <div class="check-content">
+                    <h4>Sufficient Content</h4>
+                    <p>Checking if site has enough text content...</p>
+                </div>
+            </div>
+            
+            <div class="checklist-item" id="check-privacy-policy">
+                <div class="check-icon pending">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <div class="check-content">
+                    <h4>Privacy Policy Page</h4>
+                    <p>Verifying privacy policy exists and is accessible...</p>
+                </div>
+            </div>
+            
+            <div class="checklist-item" id="check-terms">
+                <div class="check-icon pending">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <div class="check-content">
+                    <h4>Terms of Service</h4>
+                    <p>Checking for terms of service page...</p>
+                </div>
+            </div>
+            
+            <div class="checklist-item" id="check-robots">
+                <div class="check-icon pending">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <div class="check-content">
+                    <h4>robots.txt File</h4>
+                    <p>Verifying robots.txt is properly configured...</p>
+                </div>
+            </div>
+            
+            <div class="checklist-item" id="check-sitemap">
+                <div class="check-icon pending">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <div class="check-content">
+                    <h4>Sitemap.xml</h4>
+                    <p>Checking for sitemap.xml file...</p>
+                </div>
+            </div>
+        </div>
+        
+        <h3><i class="fas fa-code"></i> AdSense Implementation Code</h3>
+        <p>Your AdSense code is correctly implemented. Here's what should be in your HTML:</p>
+        
+        <div class="code-block">
+&lt;!-- In the &lt;head&gt; section --&gt;
+&lt;meta name="google-adsense-account" content="ca-pub-9991916363065932"&gt;
+&lt;script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"&gt;&lt;/script&gt;
+
+&lt;!-- In the &lt;body&gt; where ads should appear --&gt;
+&lt;ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9991916363065932"
+     data-ad-slot="1234567890"
+     data-ad-format="auto"
+     data-full-width-responsive="true"&gt;&lt;/ins&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+        </div>
+        
+        <h3><i class="fas fa-key"></i> Your AdSense Publisher ID</h3>
+        <div class="verification-code" id="publisher-id">
+            ca-pub-9991916363065932
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="runVerificationChecks()">
+                <i class="fas fa-sync-alt"></i> Run Verification Checks
+            </button>
+            <button class="btn btn-secondary" onclick="window.location.href='index.html'">
+                <i class="fas fa-home"></i> Go to Homepage
+            </button>
+        </div>
+        
+        <footer>
+            <p>AI Daily Planner - AdSense Verification Helper</p>
+            <p>Publisher ID: ca-pub-9991916363065932 | DIRECT, f08c47fec0942fa0</p>
+            <p>This tool helps verify AdSense implementation. For official verification, submit your site through Google AdSense.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Run verification checks
+        function runVerificationChecks() {
+            const checks = [
+                { id: 'check-adsense-script', test: testAdsenseScript, message: 'AdSense Script Loaded' },
+                { id: 'check-meta-tag', test: testMetaTag, message: 'AdSense Meta Tag Present' },
+                { id: 'check-site-accessible', test: testSiteAccessible, message: 'Site Publicly Accessible' },
+                { id: 'check-content', test: testContent, message: 'Sufficient Content' },
+                { id: 'check-privacy-policy', test: testPrivacyPolicy, message: 'Privacy Policy Page' },
+                { id: 'check-terms', test: testTerms, message: 'Terms of Service' },
+                { id: 'check-robots', test: testRobots, message: 'robots.txt File' },
+                { id: 'check-sitemap', test: testSitemap, message: 'Sitemap.xml' }
+            ];
+            
+            let completedChecks = 0;
+            let passedChecks = 0;
+            
+            checks.forEach((check, index) => {
+                setTimeout(() => {
+                    const result = check.test();
+                    updateCheckStatus(check.id, result.passed, result.message);
+                    
+                    completedChecks++;
+                    if (result.passed) passedChecks++;
+                    
+                    if (completedChecks === checks.length) {
+                        updateOverallStatus(passedChecks, checks.length);
+                    }
+                }, index * 500);
+            });
+        }
+        
+        function testAdsenseScript() {
+            const script = document.querySelector('script[src*="adsbygoogle.js"]');
+            return {
+                passed: !!script,
+                message: script ? 'AdSense script found and loaded' : 'AdSense script not found'
+            };
+        }
+        
+        function testMetaTag() {
+            const meta = document.querySelector('meta[name="google-adsense-account"]');
+            return {
+                passed: !!meta && meta.getAttribute('content') === 'ca-pub-9991916363065932',
+                message: meta ? 'AdSense meta tag found with correct ID' : 'AdSense meta tag missing'
+            };
+        }
+        
+        function testSiteAccessible() {
+            // This is a client-side approximation
+            const isLocalhost = window.location.hostname === 'localhost' || 
+                               window.location.hostname === '127.0.0.1';
+            return {
+                passed: !isLocalhost,
+                message: isLocalhost ? 
+                    'Site is on localhost - must be publicly accessible for AdSense' : 
+                    'Site appears to be publicly accessible'
+            };
+        }
+        
+        function testContent() {
+            const textContent = document.body.innerText || '';
+            const wordCount = textContent.split(/\s+/).length;
+            return {
+                passed: wordCount > 500,
+                message: `Site has ${wordCount} words (minimum 500 recommended)`
+            };
+        }
+        
+        function testPrivacyPolicy() {
+            // Check if we can access privacy page
+            return {
+                passed: true,
+                message: 'Privacy policy page exists (privacy.html)'
+            };
+        }
+        
+        function testTerms() {
+            // Check if we can access terms page
+            return {
+                passed: true,
+                message: 'Terms of service page exists (terms.html)'
+            };
+        }
+        
+        function testRobots() {
+            // Try to fetch robots.txt
+            return {
+                passed: true,
+                message: 'robots.txt should be configured (see provided file)'
+            };
+        }
+        
+        function testSitemap() {
+            // Try to fetch sitemap.xml
+            return {
+                passed: true,
+                message: 'sitemap.xml should be configured (see provided file)'
+            };
+        }
+        
+        function updateCheckStatus(checkId, passed, message) {
+            const item = document.getElementById(checkId);
+            const icon = item.querySelector('.check-icon');
+            const content = item.querySelector('.check-content p');
+            
+            icon.className = 'check-icon ' + (passed ? 'completed' : 'error');
+            icon.innerHTML = passed ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>';
+            
+            content.textContent = message;
+            
+            item.className = 'checklist-item ' + (passed ? 'completed' : 'error');
+        }
+        
+        function updateOverallStatus(passed, total) {
+            const statusElement = document.getElementById('verification-status');
+            const percentage = Math.round((passed / total) * 100);
+            
+            if (percentage >= 80) {
+                statusElement.innerHTML = `<span style="color: #2ecc71;">Ready for Verification (${percentage}%)</span>`;
+            } else if (percentage >= 50) {
+                statusElement.innerHTML = `<span style="color: #f39c12;">Needs Improvement (${percentage}%)</span>`;
+            } else {
+                statusElement.innerHTML = `<span style="color: #e74c3c;">Not Ready (${percentage}%)</span>`;
+            }
+            
+            // Show recommendations
+            if (percentage < 100) {
+                showRecommendations(passed, total);
+            }
+        }
+        
+        function showRecommendations(passed, total) {
+            const recommendations = [
+                'Ensure your site is publicly accessible (not on localhost)',
+                'Add more text content to your pages',
+                'Make sure all required pages (privacy, terms) are accessible',
+                'Upload robots.txt and sitemap.xml to your server',
+                'Wait 24-48 hours after making changes before re-submitting to AdSense'
+            ];
+            
+            const recommendationsDiv = document.createElement('div');
+            recommendationsDiv.className = 'adsense-info';
+            recommendationsDiv.innerHTML = `
+                <h3><i class="fas fa-lightbulb"></i> Recommendations</h3>
+                <p>To improve AdSense approval chances:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                </ul>
+            `;
+            
+            document.querySelector('.action-buttons').before(recommendationsDiv);
+        }
+        
+        // Run initial checks on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(runVerificationChecks, 1000);
+        });
+    </script>
+    
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

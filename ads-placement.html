@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Placement Guide - AI Daily Planner</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"></script>
+    <script src="ads.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e6ed;
+        }
+        
+        h1 {
+            color: #2c3e50;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .sidebar {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .ad-example {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .ad-example h3 {
+            margin-top: 0;
+            color: #495057;
+        }
+        
+        .code-block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e6ed;
+            color: #7f8c8d;
+        }
+        
+        .ad-test-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-ad"></i> Ad Placement Guide</h1>
+            <p>Implementation guide for Google AdSense ads in AI Daily Planner</p>
+        </header>
+        
+        <div class="grid">
+            <div class="sidebar">
+                <h2>Sidebar Area</h2>
+                <p>Perfect for 300x250 or 300x600 ads</p>
+                
+                <!-- Sidebar Ad Container -->
+                <div class="ad-example">
+                    <h3>Sidebar Ad</h3>
+                    <div class="ad-container" id="sidebar-ad">
+                        <!-- Ad will be loaded here by ads.js -->
+                        Loading ad...
+                    </div>
+                </div>
+                
+                <div class="code-block">
+&lt;div class="ad-container" id="sidebar-ad"&gt;
+    &lt;!-- Ad will be loaded automatically --&gt;
+&lt;/div&gt;
+                </div>
+            </div>
+            
+            <div class="content">
+                <h2>Content Area</h2>
+                <p>Perfect for 728x90, 300x250, or responsive ads</p>
+                
+                <!-- Content Ad Container 1 -->
+                <div class="ad-example">
+                    <h3>Content Ad (Top)</h3>
+                    <div class="ad-container" id="content-ad-1" style="max-width: 728px; margin: 0 auto;">
+                        <!-- Ad will be loaded here by ads.js -->
+                        Loading ad...
+                    </div>
+                </div>
+                
+                <div class="code-block">
+&lt;div class="ad-container" id="content-ad-1" style="max-width: 728px; margin: 0 auto;"&gt;
+    &lt;!-- Ad will be loaded automatically --&gt;
+&lt;/div&gt;
+                </div>
+                
+                <!-- Content Ad Container 2 -->
+                <div class="ad-example">
+                    <h3>Content Ad (Middle)</h3>
+                    <div class="ad-container" id="content-ad-2" style="max-width: 300px; margin: 0 auto;">
+                        <!-- Ad will be loaded here by ads.js -->
+                        Loading ad...
+                    </div>
+                </div>
+                
+                <!-- Bottom Ad Container -->
+                <div class="ad-example">
+                    <h3>Bottom Ad (Responsive)</h3>
+                    <div class="ad-container" id="bottom-ad">
+                        <!-- Ad will be loaded here by ads.js -->
+                        Loading ad...
+                    </div>
+                </div>
+                
+                <h2>Ad Testing Tools</h2>
+                <div class="ad-test-buttons">
+                    <button class="btn btn-primary" onclick="refreshAds()">
+                        <i class="fas fa-sync-alt"></i> Refresh Ads
+                    </button>
+                    <button class="btn btn-secondary" onclick="console.log(getAdStats())">
+                        <i class="fas fa-chart-bar"></i> Show Ad Stats
+                    </button>
+                </div>
+                
+                <div id="ad-stats" style="background-color: #e8f4f8; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> Ad Statistics</h3>
+                    <p>Click "Show Ad Stats" to see current ad performance</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>AI Daily Planner &copy; 2023 | Ad ID: google.com, pub-9991916363065932</p>
+            <p>This is a demonstration of proper AdSense implementation</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Example of how to use adManager functions
+        function showAdStats() {
+            const stats = getAdStats();
+            const statsDiv = document.getElementById('ad-stats');
+            
+            statsDiv.innerHTML = `
+                <h3><i class="fas fa-chart-bar"></i> Ad Statistics</h3>
+                <p><strong>Ads Loaded:</strong> ${stats.loaded}</p>
+                <p><strong>Ads Failed:</strong> ${stats.failed}</p>
+                <p><strong>Success Rate:</strong> ${(stats.successRate * 100).toFixed(1)}%</p>
+                <p><strong>Premium User:</strong> ${stats.premiumUser ? 'Yes' : 'No'}</p>
+                <p><strong>Ad Blocker Detected:</strong> ${stats.adBlockerDetected ? 'Yes' : 'No'}</p>
+            `;
+        }
+        
+        // Override the button to use our function
+        document.querySelector('.btn-secondary').onclick = showAdStats;
+    </script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Daily Planner - DailyWork AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Same sidebar as dashboard.html -->
+        <aside class="sidebar">
+            <!-- Copy sidebar from dashboard.html -->
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <div class="breadcrumb">
+                        <a href="dashboard.html">Dashboard</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>AI Daily Planner</span>
+                    </div>
+                </div>
+                
+                <div class="topbar-right">
+                    <button class="btn btn-primary" id="generateSchedule">
+                        <i class="fas fa-brain"></i>
+                        Generate AI Schedule
+                    </button>
+                </div>
+            </header>
+
+            <div class="planner-container">
+                <!-- Date Selector -->
+                <div class="date-selector">
+                    <button class="date-nav">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="current-date">
+                        <h2>Today, March 15</h2>
+                        <p>Friday • Week 11</p>
+                    </div>
+                    <button class="date-nav">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Planner Grid -->
+                <div class="planner-grid">
+                    <!-- Left Panel - Tasks & Energy -->
+                    <div class="planner-left">
+                        <!-- Energy Levels -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-bolt"></i>
+                                    <h3>Energy Levels</h3>
+                                </div>
+                                <span class="current-energy">Peak: 9-11 AM</span>
+                            </div>
+                            <div class="energy-chart">
+                                <canvas id="energyChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Available Tasks -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-tasks"></i>
+                                    <h3>Available Tasks</h3>
+                                </div>
+                                <span class="task-count">12 tasks</span>
+                            </div>
+                            <div class="task-list" id="availableTasks">
+                                <!-- Tasks will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Center Panel - Timeline -->
+                    <div class="planner-center">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <h3>Daily Timeline</h3>
+                                </div>
+                                <div class="timeline-actions">
+                                    <button class="btn-icon" title="Add Time Block">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Clear All">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="timeline-container">
+                                <div class="time-slots">
+                                    <!-- Time slots from 6 AM to 10 PM -->
+                                </div>
+                                <div class="scheduled-blocks">
+                                    <!-- Scheduled blocks will be added here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Suggestions -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-robot"></i>
+                                    <h3>AI Schedule Suggestions</h3>
+                                </div>
+                                <button class="btn-icon" id="refreshSuggestions">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                            <div class="suggestions-list" id="aiScheduleSuggestions">
+                                <!-- Suggestions will be populated -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Stats & Tools -->
+                    <div class="planner-right">
+                        <!-- Schedule Stats -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-chart-pie"></i>
+                                    <h3>Schedule Stats</h3>
+                                </div>
+                            </div>
+                            <div class="schedule-stats">
+                                <div class="stat">
+                                    <div class="stat-value" id="totalHours">8.5</div>
+                                    <div class="stat-label">Total Hours</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="focusBlocks">4</div>
+                                    <div class="stat-label">Focus Blocks</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="breakTime">1.5</div>
+                                    <div class="stat-label">Break Time</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="efficiencyScore">87%</div>
+                                    <div class="stat-label">Efficiency</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Schedule Tools -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-magic"></i>
+                                    <h3>Quick Schedule</h3>
+                                </div>
+                            </div>
+                            <div class="schedule-tools">
+                                <button class="tool-btn" data-preset="deep-work">
+                                    <i class="fas fa-brain"></i>
+                                    <span>Deep Work Day</span>
+                                </button>
+                                <button class="tool-btn" data-preset="meetings">
+                                    <i class="fas fa-users"></i>
+                                    <span>Meeting Day</span>
+                                </button>
+                                <button class="tool-btn" data-preset="creative">
+                                    <i class="fas fa-palette"></i>
+                                    <span>Creative Day</span>
+                                </button>
+                                <button class="tool-btn" data-preset="balanced">
+                                    <i class="fas fa-balance-scale"></i>
+                                    <span>Balanced Day</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Weather & Context -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-cloud-sun"></i>
+                                    <h3>Today's Context</h3>
+                                </div>
+                            </div>
+                            <div class="context-info">
+                                <div class="context-item">
+                                    <i class="fas fa-temperature-high"></i>
+                                    <div>
+                                        <div class="context-label">Weather</div>
+                                        <div class="context-value">Sunny, 72°F</div>
+                                    </div>
+                                </div>
+                                <div class="context-item">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <div>
+                                        <div class="context-label">Events</div>
+                                        <div class="context-value">2 meetings scheduled</div>
+                                    </div>
+                                </div>
+                                <div class="context-item">
+                                    <i class="fas fa-bell"></i>
+                                    <div>
+                                        <div class="context-label">Reminders</div>
+                                        <div class="context-value">Team deadline tomorrow</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="ai/ai-service.js"></script>
+    <script src="planner.js"></script>
+<!-- Add these scripts in order -->
+<script src="auth-manager.js"></script>
+<script src="common-header.js"></script>
+<script src="navigation.js"></script>
+
+<script>
+    // Initialize page-specific functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check authentication state
+        const user = window.authManager?.getCurrentUser();
+        
+        if (!user && !window.location.pathname.includes('index.html') && 
+            !window.location.pathname.includes('login.html') && 
+            !window.location.pathname.includes('signup.html')) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        // Initialize page-specific functionality
+        initPageSpecificFunctionality();
+    });
+    
+    function initPageSpecificFunctionality() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        switch(currentPage) {
+            case 'dashboard.html':
+                initDashboard();
+                break;
+            case 'tasks.html':
+                initTasks();
+                break;
+            case 'focus.html':
+                initFocus();
+                break;
+            case 'habits.html':
+                initHabits();
+                break;
+            case 'notes.html':
+                initNotes();
+                break;
+            case 'analytics.html':
+                initAnalytics();
+                break;
+            case 'profile.html':
+                initProfile();
+                break;
+            case 'settings.html':
+                initSettings();
+                break;
+            default:
+                // No specific initialization needed
+        }
+    }
+    
+    // Page-specific initialization functions
+    function initDashboard() {
+        // Dashboard specific initialization
+        console.log('Initializing dashboard...');
+    }
+    
+    function initTasks() {
+        // Tasks specific initialization
+        console.log('Initializing tasks...');
+    }
+    
+    function initFocus() {
+        // Focus specific initialization
+        console.log('Initializing focus...');
+    }
+    
+    function initHabits() {
+        // Habits specific initialization
+        console.log('Initializing habits...');
+    }
+    
+    function initNotes() {
+        // Notes specific initialization
+        console.log('Initializing notes...');
+    }
+    
+    function initAnalytics() {
+        // Analytics specific initialization
+        console.log('Initializing analytics...');
+    }
+    
+    function initProfile() {
+        // Profile specific initialization
+        const user = window.authManager?.getCurrentUser();
+        if (!user) return;
+        
+        // Populate profile form
+        document.getElementById('profile-name')?.value = user.displayName || '';
+        document.getElementById('profile-email')?.value = user.email || '';
+        
+        // Set up profile update form
+        const profileForm = document.getElementById('profile-form');
+        if (profileForm) {
+            profileForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('profile-name').value;
+                const email = document.getElementById('profile-email').value;
+                
+                try {
+                    await window.authManager.updateUserProfile({
+                        displayName: name
+                    });
+                    
+                    alert('Profile updated successfully!');
+                } catch (error) {
+                    alert('Error updating profile: ' + error);
+                }
+            });
+        }
+    }
+    
+    function initSettings() {
+        // Settings specific initialization
+        console.log('Initializing settings...');
+    }
+</script>
+</body>
+</html>

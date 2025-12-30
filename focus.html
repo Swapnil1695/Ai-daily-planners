@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Daily Planner - Focus Mode</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>AI Daily Planner</h1>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="tasks.html"><i class="fas fa-tasks"></i> Tasks</a></li>
+                <li><a href="focus.html" class="active"><i class="fas fa-bullseye"></i> Focus</a></li>
+                <li><a href="habits.html"><i class="fas fa-chart-line"></i> Habits</a></li>
+                <li><a href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a></li>
+                <li><a href="analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="premium.html"><i class="fas fa-crown"></i> Premium</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            
+            <!-- Sidebar Ad -->
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+                <div class="ad-content">
+                    <i class="fas fa-ad"></i>
+                    <p>Focus & Concentration Tools<br>Increase productivity by 300%</p>
+                    <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h2><i class="fas fa-bullseye"></i> Focus Mode</h2>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=3498db&color=fff" alt="User">
+                    <div>
+                        <p>Focus Sessions: 24 this week</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pomodoro Timer -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-clock"></i> Pomodoro Timer</h3>
+                    <div class="btn-group">
+                        <button class="btn btn-secondary" id="short-break">
+                            <i class="fas fa-coffee"></i> Short Break
+                        </button>
+                        <button class="btn" id="start-timer">
+                            <i class="fas fa-play"></i> Start Focus
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="timer-container">
+                    <div class="timer-display" id="timer-display">25:00</div>
+                    
+                    <div class="timer-controls">
+                        <button class="btn btn-secondary" id="pomodoro-btn">
+                            <i class="fas fa-tomato"></i> Pomodoro (25min)
+                        </button>
+                        <button class="btn btn-secondary" id="short-break-btn">
+                            <i class="fas fa-coffee"></i> Short Break (5min)
+                        </button>
+                        <button class="btn btn-secondary" id="long-break-btn">
+                            <i class="fas fa-utensils"></i> Long Break (15min)
+                        </button>
+                    </div>
+                    
+                    <div class="timer-controls">
+                        <button class="btn" id="start-stop-btn">
+                            <i class="fas fa-play"></i> Start
+                        </button>
+                        <button class="btn btn-secondary" id="reset-btn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                    
+                    <p style="margin-top: 30px; color: #7f8c8d;">
+                        <i class="fas fa-info-circle"></i> Pomodoro Technique: 25 minutes of focused work followed by a 5-minute break
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Focus Stats -->
+            <div class="dashboard">
+                <div class="dashboard-card">
+                    <h4><i class="fas fa-chart-line"></i> Today's Focus</h4>
+                    <p><strong>Focus Time:</strong> 2h 45m</p>
+                    <p><strong>Sessions Completed:</strong> 5</p>
+                    <p><strong>Breaks Taken:</strong> 4</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <p style="margin-top: 10px;"><strong>Daily Goal:</strong> 75% complete</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h4><i class="fas fa-trophy"></i> Weekly Stats</h4>
+                    <p><strong>Total Focus Time:</strong> 14h 30m</p>
+                    <p><strong>Average per Day:</strong> 2h 54m</p>
+                    <p><strong>Best Day:</strong> Tuesday (3h 45m)</p>
+                    <p><strong>Consistency:</strong> 6/7 days</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h4><i class="fas fa-brain"></i> Focus Recommendations</h4>
+                    <ul class="schedule-list">
+                        <li><i class="fas fa-check-circle" style="color: #2ecc71;"></i> Take breaks every 25-30 minutes</li>
+                        <li><i class="fas fa-check-circle" style="color: #2ecc71;"></i> Schedule deep work in morning</li>
+                        <li><i class="fas fa-exclamation-triangle" style="color: #e74c3c;"></i> You're skipping too many breaks</li>
+                        <li><i class="fas fa-check-circle" style="color: #2ecc71;"></i> Try ambient noise for concentration</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Ads Section -->
+            <div class="ads-section">
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-headphones"></i>
+                        <p>Focus Music & Sounds<br>Curated playlists for deep work</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+                
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-book"></i>
+                        <p>Deep Work by Cal Newport<br>Learn to focus in distracted world</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Distraction Blocker -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-shield-alt"></i> Distraction Blocker</h3>
+                    <button class="btn" id="block-distractions">
+                        <i class="fas fa-lock"></i> Block Now
+                    </button>
+                </div>
+                
+                <div class="input-group">
+                    <label><i class="fas fa-ban"></i> Websites to Block During Focus</label>
+                    <input type="text" value="facebook.com, twitter.com, youtube.com, instagram.com" placeholder="Enter websites to block (comma separated)">
+                </div>
+                
+                <div class="input-group">
+                    <label><i class="fas fa-clock"></i> Block Duration</label>
+                    <select>
+                        <option>25 minutes (Pomodoro)</option>
+                        <option>1 hour</option>
+                        <option>2 hours</option>
+                        <option>4 hours</option>
+                        <option>Until end of work day</option>
+                    </select>
+                </div>
+                
+                <p style="color: #7f8c8d; margin-top: 20px;">
+                    <i class="fas fa-info-circle"></i> When enabled, AI will block distracting websites and send you reminders to stay focused.
+                </p>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>AI Daily Planner &copy; 2023 | Using Ad ID: google.com, pub-9991916363065932, DIRECT, f08c47fec0942fa0</p>
+                <p>Focus mode helps you maintain concentration and avoid distractions.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Timer functionality
+        let timerInterval;
+        let timeLeft = 25 * 60; // 25 minutes in seconds
+        let isRunning = false;
+        
+        const timerDisplay = document.getElementById('timer-display');
+        const startStopBtn = document.getElementById('start-stop-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const pomodoroBtn = document.getElementById('pomodoro-btn');
+        const shortBreakBtn = document.getElementById('short-break-btn');
+        const longBreakBtn = document.getElementById('long-break-btn');
+        
+        function updateDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                startStopBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+                startStopBtn.classList.remove('btn-success');
+                
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    updateDisplay();
+                    
+                    if (timeLeft === 0) {
+                        clearInterval(timerInterval);
+                        isRunning = false;
+                        startStopBtn.innerHTML = '<i class="fas fa-play"></i> Start';
+                        alert('Timer complete! Time for a break.');
+                    }
+                }, 1000);
+            } else {
+                clearInterval(timerInterval);
+                isRunning = false;
+                startStopBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
+            }
+        }
+        
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            startStopBtn.innerHTML = '<i class="fas fa-play"></i> Start';
+            // Default to pomodoro time
+            timeLeft = 25 * 60;
+            updateDisplay();
+        }
+        
+        function setPomodoro() {
+            timeLeft = 25 * 60;
+            updateDisplay();
+            resetTimer();
+        }
+        
+        function setShortBreak() {
+            timeLeft = 5 * 60;
+            updateDisplay();
+            resetTimer();
+        }
+        
+        function setLongBreak() {
+            timeLeft = 15 * 60;
+            updateDisplay();
+            resetTimer();
+        }
+        
+        // Event listeners
+        startStopBtn.addEventListener('click', startTimer);
+        resetBtn.addEventListener('click', resetTimer);
+        pomodoroBtn.addEventListener('click', setPomodoro);
+        shortBreakBtn.addEventListener('click', setShortBreak);
+        longBreakBtn.addEventListener('click', setLongBreak);
+        
+        // Distraction blocker
+        document.getElementById('block-distractions').addEventListener('click', function() {
+            alert('Distractions blocked for 25 minutes. Focus mode activated!');
+            this.innerHTML = '<i class="fas fa-lock"></i> Block Active';
+            this.classList.add('btn-success');
+        });
+        
+        // Initialize
+        updateDisplay();
+    </script>
+<!-- Add these scripts in order -->
+<script src="auth-manager.js"></script>
+<script src="common-header.js"></script>
+<script src="navigation.js"></script>
+
+<script>
+    // Initialize page-specific functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check authentication state
+        const user = window.authManager?.getCurrentUser();
+        
+        if (!user && !window.location.pathname.includes('index.html') && 
+            !window.location.pathname.includes('login.html') && 
+            !window.location.pathname.includes('signup.html')) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        // Initialize page-specific functionality
+        initPageSpecificFunctionality();
+    });
+    
+    function initPageSpecificFunctionality() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        switch(currentPage) {
+            case 'dashboard.html':
+                initDashboard();
+                break;
+            case 'tasks.html':
+                initTasks();
+                break;
+            case 'focus.html':
+                initFocus();
+                break;
+            case 'habits.html':
+                initHabits();
+                break;
+            case 'notes.html':
+                initNotes();
+                break;
+            case 'analytics.html':
+                initAnalytics();
+                break;
+            case 'profile.html':
+                initProfile();
+                break;
+            case 'settings.html':
+                initSettings();
+                break;
+            default:
+                // No specific initialization needed
+        }
+    }
+    
+    // Page-specific initialization functions
+    function initDashboard() {
+        // Dashboard specific initialization
+        console.log('Initializing dashboard...');
+    }
+    
+    function initTasks() {
+        // Tasks specific initialization
+        console.log('Initializing tasks...');
+    }
+    
+    function initFocus() {
+        // Focus specific initialization
+        console.log('Initializing focus...');
+    }
+    
+    function initHabits() {
+        // Habits specific initialization
+        console.log('Initializing habits...');
+    }
+    
+    function initNotes() {
+        // Notes specific initialization
+        console.log('Initializing notes...');
+    }
+    
+    function initAnalytics() {
+        // Analytics specific initialization
+        console.log('Initializing analytics...');
+    }
+    
+    function initProfile() {
+        // Profile specific initialization
+        const user = window.authManager?.getCurrentUser();
+        if (!user) return;
+        
+        // Populate profile form
+        document.getElementById('profile-name')?.value = user.displayName || '';
+        document.getElementById('profile-email')?.value = user.email || '';
+        
+        // Set up profile update form
+        const profileForm = document.getElementById('profile-form');
+        if (profileForm) {
+            profileForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('profile-name').value;
+                const email = document.getElementById('profile-email').value;
+                
+                try {
+                    await window.authManager.updateUserProfile({
+                        displayName: name
+                    });
+                    
+                    alert('Profile updated successfully!');
+                } catch (error) {
+                    alert('Error updating profile: ' + error);
+                }
+            });
+        }
+    }
+    
+    function initSettings() {
+        // Settings specific initialization
+        console.log('Initializing settings...');
+    }
+</script>
+</body>
+</html>

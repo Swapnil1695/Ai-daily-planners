@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Daily Planner - Habits</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>AI Daily Planner</h1>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="tasks.html"><i class="fas fa-tasks"></i> Tasks</a></li>
+                <li><a href="focus.html"><i class="fas fa-bullseye"></i> Focus</a></li>
+                <li><a href="habits.html" class="active"><i class="fas fa-chart-line"></i> Habits</a></li>
+                <li><a href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a></li>
+                <li><a href="analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="premium.html"><i class="fas fa-crown"></i> Premium</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            
+            <!-- Sidebar Ad -->
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+                <div class="ad-content">
+                    <i class="fas fa-ad"></i>
+                    <p>Habit Formation Course<br>Build lasting habits in 30 days</p>
+                    <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h2><i class="fas fa-chart-line"></i> Habits Tracking</h2>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=3498db&color=fff" alt="User">
+                    <div>
+                        <h4>Alex Johnson</h4>
+                        <p>Current Streak: 14 days</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Habit Stats -->
+            <div class="dashboard">
+                <div class="dashboard-card">
+                    <h4><i class="fas fa-fire"></i> Current Streak</h4>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="font-size: 48px; font-weight: 700; color: #e74c3c;">14</div>
+                        <p style="color: #7f8c8d;">Days in a row</p>
+                    </div>
+                    <p><strong>Best Streak:</strong> 21 days</p>
+                    <p><strong>Started:</strong> April 30, 2023</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h4><i class="fas fa-trophy"></i> Monthly Progress</h4>
+                    <p><strong>Habits Tracked:</strong> 8</p>
+                    <p><strong>Completion Rate:</strong> 78%</p>
+                    <p><strong>Most Consistent:</strong> Morning Routine (95%)</p>
+                    <p><strong>Needs Work:</strong> Evening Reading (45%)</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h4><i class="fas fa-lightbulb"></i> AI Recommendations</h4>
+                    <ul class="schedule-list">
+                        <li><i class="fas fa-check-circle" style="color: #2ecc71;"></i> You're doing great with exercise!</li>
+                        <li><i class="fas fa-exclamation-triangle" style="color: #e74c3c;"></i> Try scheduling reading at same time daily</li>
+                        <li><i class="fas fa-check-circle" style="color: #2ecc71;"></i> Habit stacking is working well</li>
+                        <li><i class="fas fa-check-circle" style="color: #2ecc71;"></i> Consider adding a meditation habit</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Add New Habit -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-plus-circle"></i> Add New Habit</h3>
+                    <button class="btn" id="add-habit">
+                        <i class="fas fa-plus"></i> Create Habit
+                    </button>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="input-group">
+                        <label for="habit-name"><i class="fas fa-tag"></i> Habit Name</label>
+                        <input type="text" id="habit-name" placeholder="e.g. Morning Meditation">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="habit-frequency"><i class="fas fa-calendar"></i> Frequency</label>
+                        <select id="habit-frequency">
+                            <option>Daily</option>
+                            <option>Weekdays</option>
+                            <option>Weekly</option>
+                            <option>3x per week</option>
+                            <option>Custom</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="habit-time"><i class="fas fa-clock"></i> Best Time</label>
+                        <select id="habit-time">
+                            <option>Morning</option>
+                            <option>Afternoon</option>
+                            <option>Evening</option>
+                            <option>Anytime</option>
+                            <option>Specific Time</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="habit-notes"><i class="fas fa-sticky-note"></i> Notes & Motivation</label>
+                    <textarea id="habit-notes" placeholder="Why is this habit important to you? What's your motivation?"></textarea>
+                </div>
+            </div>
+            
+            <!-- Ads Section -->
+            <div class="ads-section">
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-book"></i>
+                        <p>Atomic Habits by James Clear<br>Learn tiny changes for remarkable results</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+                
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-apple-alt"></i>
+                        <p>Health & Wellness Tracker<br>Monitor diet, exercise, and sleep habits</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Current Habits -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-list"></i> Your Current Habits</h3>
+                    <button class="btn btn-secondary" id="ai-suggest">
+                        <i class="fas fa-robot"></i> AI Suggestions
+                    </button>
+                </div>
+                
+                <div class="habit-grid">
+                    <div class="habit-card">
+                        <h5>Morning Routine</h5>
+                        <div class="habit-streak">42</div>
+                        <p>Days streak</p>
+                        <div class="progress-bar" style="margin-top: 15px;">
+                            <div class="progress-fill" style="width: 95%"></div>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 14px;">95% completion</p>
+                    </div>
+                    
+                    <div class="habit-card">
+                        <h5>Daily Exercise</h5>
+                        <div class="habit-streak">28</div>
+                        <p>Days streak</p>
+                        <div class="progress-bar" style="margin-top: 15px;">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 14px;">85% completion</p>
+                    </div>
+                    
+                    <div class="habit-card">
+                        <h5>Evening Reading</h5>
+                        <div class="habit-streak">7</div>
+                        <p>Days streak</p>
+                        <div class="progress-bar" style="margin-top: 15px;">
+                            <div class="progress-fill" style="width: 45%"></div>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 14px;">45% completion</p>
+                    </div>
+                    
+                    <div class="habit-card">
+                        <h5>Meditation</h5>
+                        <div class="habit-streak">14</div>
+                        <p>Days streak</p>
+                        <div class="progress-bar" style="margin-top: 15px;">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 14px;">75% completion</p>
+                    </div>
+                    
+                    <div class="habit-card">
+                        <h5>Weekly Planning</h5>
+                        <div class="habit-streak">12</div>
+                        <p>Weeks streak</p>
+                        <div class="progress-bar" style="margin-top: 15px;">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 14px;">90% completion</p>
+                    </div>
+                    
+                    <div class="habit-card">
+                        <h5>Digital Detox</h5>
+                        <div class="habit-streak">5</div>
+                        <p>Days streak</p>
+                        <div class="progress-bar" style="margin-top: 15px;">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 14px;">60% completion</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>AI Daily Planner &copy; 2023 | Using Ad ID: google.com, pub-9991916363065932, DIRECT, f08c47fec0942fa0</p>
+                <p>Track your habits and build a better routine with AI-powered insights.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add habit functionality
+        document.getElementById('add-habit').addEventListener('click', function() {
+            const habitName = document.getElementById('habit-name').value;
+            const frequency = document.getElementById('habit-frequency').value;
+            
+            if (!habitName) {
+                alert('Please enter a habit name');
+                return;
+            }
+            
+            // In a real app, this would save to backend
+            // For demo, we'll just show a message
+            alert(`New habit "${habitName}" created with ${frequency} frequency!`);
+            
+            // Reset form
+            document.getElementById('habit-name').value = '';
+            document.getElementById('habit-notes').value = '';
+        });
+        
+        // AI suggestions
+        document.getElementById('ai-suggest').addEventListener('click', function() {
+            const suggestions = [
+                "Based on your goals, try adding a hydration tracking habit",
+                "Consider a weekly review habit to reflect on progress",
+                "Your sleep schedule could use tracking for better energy",
+                "Add a gratitude journal habit for mental wellbeing"
+            ];
+            
+            const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+            alert(`AI Suggestion: ${randomSuggestion}`);
+        });
+        
+        // Initialize with sample data
+        window.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('habit-name').value = 'Evening Journal';
+            document.getElementById('habit-notes').value = 'Reflect on the day and plan for tomorrow';
+        });
+    </script>
+<!-- Add these scripts in order -->
+<script src="auth-manager.js"></script>
+<script src="common-header.js"></script>
+<script src="navigation.js"></script>
+
+<script>
+    // Initialize page-specific functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check authentication state
+        const user = window.authManager?.getCurrentUser();
+        
+        if (!user && !window.location.pathname.includes('index.html') && 
+            !window.location.pathname.includes('login.html') && 
+            !window.location.pathname.includes('signup.html')) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        // Initialize page-specific functionality
+        initPageSpecificFunctionality();
+    });
+    
+    function initPageSpecificFunctionality() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        switch(currentPage) {
+            case 'dashboard.html':
+                initDashboard();
+                break;
+            case 'tasks.html':
+                initTasks();
+                break;
+            case 'focus.html':
+                initFocus();
+                break;
+            case 'habits.html':
+                initHabits();
+                break;
+            case 'notes.html':
+                initNotes();
+                break;
+            case 'analytics.html':
+                initAnalytics();
+                break;
+            case 'profile.html':
+                initProfile();
+                break;
+            case 'settings.html':
+                initSettings();
+                break;
+            default:
+                // No specific initialization needed
+        }
+    }
+    
+    // Page-specific initialization functions
+    function initDashboard() {
+        // Dashboard specific initialization
+        console.log('Initializing dashboard...');
+    }
+    
+    function initTasks() {
+        // Tasks specific initialization
+        console.log('Initializing tasks...');
+    }
+    
+    function initFocus() {
+        // Focus specific initialization
+        console.log('Initializing focus...');
+    }
+    
+    function initHabits() {
+        // Habits specific initialization
+        console.log('Initializing habits...');
+    }
+    
+    function initNotes() {
+        // Notes specific initialization
+        console.log('Initializing notes...');
+    }
+    
+    function initAnalytics() {
+        // Analytics specific initialization
+        console.log('Initializing analytics...');
+    }
+    
+    function initProfile() {
+        // Profile specific initialization
+        const user = window.authManager?.getCurrentUser();
+        if (!user) return;
+        
+        // Populate profile form
+        document.getElementById('profile-name')?.value = user.displayName || '';
+        document.getElementById('profile-email')?.value = user.email || '';
+        
+        // Set up profile update form
+        const profileForm = document.getElementById('profile-form');
+        if (profileForm) {
+            profileForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('profile-name').value;
+                const email = document.getElementById('profile-email').value;
+                
+                try {
+                    await window.authManager.updateUserProfile({
+                        displayName: name
+                    });
+                    
+                    alert('Profile updated successfully!');
+                } catch (error) {
+                    alert('Error updating profile: ' + error);
+                }
+            });
+        }
+    }
+    
+    function initSettings() {
+        // Settings specific initialization
+        console.log('Initializing settings...');
+    }
+</script>
+</body>
+</html>

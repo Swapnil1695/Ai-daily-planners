@@ -1,0 +1,2295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Work AI - Daily Schedule & Time Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"></script>
+    <style>
+        /* Daily Schedule Specific Styles */
+        .schedule-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .time-slots {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+        
+        .time-slot {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .time-slot:hover {
+            background-color: #f8fafc;
+            transform: translateX(5px);
+        }
+        
+        .time-slot.active {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .time-slot .time {
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 16px;
+        }
+        
+        .time-slot .status {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        .status.available {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--success-color);
+        }
+        
+        .status.busy {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .status.break {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .schedule-calendar {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .calendar-nav {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .calendar-date {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 0;
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+        }
+        
+        .time-column {
+            border-right: 1px solid var(--border-color);
+        }
+        
+        .time-label {
+            height: 60px;
+            padding: 10px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--dark-color);
+            background-color: #f8fafc;
+        }
+        
+        .time-label:last-child {
+            border-bottom: none;
+        }
+        
+        .schedule-column {
+            position: relative;
+        }
+        
+        .time-block {
+            height: 60px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .time-block:hover {
+            background-color: #f8fafc;
+        }
+        
+        .time-block:last-child {
+            border-bottom: none;
+        }
+        
+        .event {
+            position: absolute;
+            left: 5px;
+            right: 5px;
+            border-radius: var(--border-radius);
+            padding: 12px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .event:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .event.work {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .event.personal {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .event.meeting {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .event.break {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .event.learning {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .event-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+        
+        .event-time {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+        
+        .event-actions {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            display: none;
+        }
+        
+        .event:hover .event-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .event-actions button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            transition: var(--transition);
+        }
+        
+        .event-actions button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .empty-slot {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+        
+        /* Quick Schedule Form */
+        .quick-schedule-form {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        /* Notification Settings */
+        .notification-settings {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .notification-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        .notification-info {
+            flex: 1;
+        }
+        
+        .notification-info h5 {
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .notification-info p {
+            font-size: 14px;
+            color: var(--gray-color);
+            margin-bottom: 0;
+        }
+        
+        .notification-time {
+            margin-right: 20px;
+            min-width: 120px;
+        }
+        
+        .notification-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Auto Schedule Modal */
+        .auto-schedule-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+        
+        .auto-schedule-modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            color: var(--dark-color);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            background-color: #f8f9fa;
+            color: var(--danger-color);
+        }
+        
+        /* Time Statistics */
+        .time-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .time-stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .time-stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+        }
+        
+        .time-stat-card:nth-child(1) .time-stat-icon {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            color: var(--primary-color);
+        }
+        
+        .time-stat-card:nth-child(2) .time-stat-icon {
+            background: linear-gradient(135deg, rgba(67, 233, 123, 0.1) 0%, rgba(56, 249, 215, 0.1) 100%);
+            color: var(--success-color);
+        }
+        
+        .time-stat-card:nth-child(3) .time-stat-icon {
+            background: linear-gradient(135deg, rgba(250, 112, 154, 0.1) 0%, rgba(254, 225, 64, 0.1) 100%);
+            color: var(--warning-color);
+        }
+        
+        .time-stat-card:nth-child(4) .time-stat-icon {
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+            color: #4facfe;
+        }
+        
+        .time-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+        
+        .time-stat-label {
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .schedule-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .time-slots {
+                order: 2;
+            }
+            
+            .calendar-grid {
+                grid-template-columns: 80px 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .calendar-grid {
+                grid-template-columns: 60px 1fr;
+            }
+            
+            .time-label {
+                font-size: 12px;
+                padding: 5px;
+            }
+            
+            .event {
+                padding: 8px;
+                font-size: 12px;
+            }
+            
+            .notification-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .notification-time {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .notification-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .calendar-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .calendar-nav {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .time-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>Daily Work AI</h1>
+                <button class="toggle-sidebar">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="dashboard.html"><i class="fas fa-home"></i> <span>Dashboard</span></a></li>
+                <li><a href="daily-schedule.html" class="active"><i class="fas fa-calendar-day"></i> <span>Daily Schedule</span></a></li>
+                <li><a href="tasks.html"><i class="fas fa-tasks"></i> <span>Tasks</span></a></li>
+                <li><a href="focus.html"><i class="fas fa-bullseye"></i> <span>Focus</span></a></li>
+                <li><a href="habits.html"><i class="fas fa-chart-line"></i> <span>Habits</span></a></li>
+                <li><a href="notes.html"><i class="fas fa-sticky-note"></i> <span>Notes</span></a></li>
+                <li><a href="analytics.html"><i class="fas fa-chart-bar"></i> <span>Analytics</span></a></li>
+                <li><a href="premium.html"><i class="fas fa-crown"></i> <span>Premium</span></a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+                <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+            </ul>
+            
+            <!-- Sidebar Ad -->
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+                <div class="ad-content">
+                    <i class="fas fa-ad"></i>
+                    <p>Time Management Mastery<br>Learn to optimize your daily schedule</p>
+                    <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                </div>
+            </div>
+            
+            <!-- User Status -->
+            <div class="user-status" id="user-status">
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <div class="live-indicator"></div>
+                    <span style="font-size: 12px;">LIVE SYNC</span>
+                </div>
+                <div style="font-size: 12px; color: #bdc3c7;">
+                    <span id="online-count">0</span> users online
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div>
+                    <h2><i class="fas fa-calendar-day"></i> Daily Schedule</h2>
+                    <p id="current-date" style="color: #7f8c8d; margin-top: 5px;">Loading date...</p>
+                </div>
+                <div class="user-profile">
+                    <img id="user-avatar" src="https://ui-avatars.com/api/?name=User&background=3498db&color=fff" alt="User">
+                    <div>
+                        <h4 id="user-name">Loading...</h4>
+                        <p id="user-email" style="font-size: 12px;">Loading...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Time Statistics -->
+            <div class="time-stats">
+                <div class="time-stat-card">
+                    <div class="time-stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="time-stat-value" id="total-work-time">0h 0m</div>
+                    <div class="time-stat-label">Work Time Today</div>
+                </div>
+                
+                <div class="time-stat-card">
+                    <div class="time-stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="time-stat-value" id="tasks-completed">0</div>
+                    <div class="time-stat-label">Tasks Completed</div>
+                </div>
+                
+                <div class="time-stat-card">
+                    <div class="time-stat-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <div class="time-stat-value" id="break-time">0m</div>
+                    <div class="time-stat-label">Break Time</div>
+                </div>
+                
+                <div class="time-stat-card">
+                    <div class="time-stat-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="time-stat-value" id="productivity-score">0%</div>
+                    <div class="time-stat-label">Productivity</div>
+                </div>
+            </div>
+            
+            <!-- Quick Schedule Form -->
+            <div class="quick-schedule-form">
+                <div class="section-title">
+                    <h3><i class="fas fa-plus-circle"></i> Add New Schedule Item</h3>
+                    <button class="btn" id="auto-schedule-btn">
+                        <i class="fas fa-robot"></i> AI Auto-Schedule
+                    </button>
+                </div>
+                
+                <form id="schedule-form">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="event-title"><i class="fas fa-heading"></i> Title</label>
+                            <input type="text" id="event-title" placeholder="Meeting, Work Session, Break, etc." required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="event-category"><i class="fas fa-tag"></i> Category</label>
+                            <select id="event-category">
+                                <option value="work">Work</option>
+                                <option value="personal">Personal</option>
+                                <option value="meeting">Meeting</option>
+                                <option value="break">Break</option>
+                                <option value="learning">Learning</option>
+                                <option value="exercise">Exercise</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="event-start"><i class="fas fa-play"></i> Start Time</label>
+                            <input type="time" id="event-start" value="09:00" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="event-end"><i class="fas fa-stop"></i> End Time</label>
+                            <input type="time" id="event-end" value="10:00" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="event-description"><i class="fas fa-align-left"></i> Description (Optional)</label>
+                        <textarea id="event-description" placeholder="Add details about this schedule item..." rows="3"></textarea>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                        <div>
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="event-notification" checked>
+                                <span>Set Notification</span>
+                            </label>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <button type="button" class="btn btn-secondary" id="clear-form">
+                                Clear
+                            </button>
+                            <button type="submit" class="btn">
+                                <i class="fas fa-plus"></i> Add to Schedule
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Main Schedule Area -->
+            <div class="schedule-container">
+                <!-- Time Slots Sidebar -->
+                <div class="time-slots">
+                    <div class="section-title" style="margin-bottom: 20px;">
+                        <h4><i class="fas fa-clock"></i> Today's Timeline</h4>
+                    </div>
+                    
+                    <div id="time-slots-list">
+                        <!-- Time slots will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Calendar View -->
+                <div class="schedule-calendar">
+                    <div class="calendar-header">
+                        <div class="calendar-date" id="calendar-date">Today, May 15, 2023</div>
+                        <div class="calendar-nav">
+                            <button class="btn btn-icon" id="prev-day">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="btn btn-secondary" id="today-btn">
+                                Today
+                            </button>
+                            <button class="btn btn-icon" id="next-day">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-grid" id="calendar-grid">
+                        <!-- Calendar will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ads Section -->
+            <div class="ads-section">
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-calendar-alt"></i>
+                        <p>Calendar & Scheduling Tools<br>Advanced features for time management</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+                
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-bell"></i>
+                        <p>Smart Notification Systems<br>Never miss important appointments</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notification Settings -->
+            <div class="notification-settings">
+                <div class="section-title">
+                    <h3><i class="fas fa-bell"></i> Schedule Notifications</h3>
+                    <button class="btn btn-secondary" id="test-notification">
+                        <i class="fas fa-play"></i> Test Notification
+                    </button>
+                </div>
+                
+                <div id="notifications-list">
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h5>Morning Standup Meeting</h5>
+                            <p>Daily team sync to discuss priorities</p>
+                        </div>
+                        <div class="notification-time">
+                            <span style="font-weight: 600; color: var(--dark-color);">9:00 AM</span>
+                            <span style="color: var(--gray-color); font-size: 13px;"> (15 min before)</span>
+                        </div>
+                        <div class="notification-actions">
+                            <button class="btn-icon" style="width: 36px; height: 36px;">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon" style="width: 36px; height: 36px; background-color: rgba(231, 76, 60, 0.1); color: var(--danger-color);">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h5>Lunch Break</h5>
+                            <p>Take a break and recharge</p>
+                        </div>
+                        <div class="notification-time">
+                            <span style="font-weight: 600; color: var(--dark-color);">1:00 PM</span>
+                            <span style="color: var(--gray-color); font-size: 13px;"> (On time)</span>
+                        </div>
+                        <div class="notification-actions">
+                            <button class="btn-icon" style="width: 36px; height: 36px;">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon" style="width: 36px; height: 36px; background-color: rgba(231, 76, 60, 0.1); color: var(--danger-color);">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group" style="margin-top: 30px;">
+                    <label><i class="fas fa-sliders-h"></i> Notification Settings</label>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 15px;">
+                        <div>
+                            <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                <input type="checkbox" id="enable-notifications" checked>
+                                <span>Enable Notifications</span>
+                            </label>
+                            
+                            <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                <input type="checkbox" id="sound-notifications" checked>
+                                <span>Sound Alerts</span>
+                            </label>
+                        </div>
+                        
+                        <div>
+                            <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                <input type="checkbox" id="desktop-notifications" checked>
+                                <span>Desktop Notifications</span>
+                            </label>
+                            
+                            <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                <input type="checkbox" id="email-notifications">
+                                <span>Email Reminders</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>Daily Work AI &copy; 2023 | Using Ad ID: google.com, pub-9991916363065932, DIRECT, f08c47fec0942fa0</p>
+                <p>AI-powered daily scheduling with smart notifications and time management analytics.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Auto Schedule Modal -->
+    <div class="auto-schedule-modal" id="auto-schedule-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-robot"></i> AI Auto-Schedule Generator</h3>
+                <button class="close-modal" id="close-auto-schedule">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="input-group">
+                <label for="auto-focus"><i class="fas fa-bullseye"></i> Primary Focus for Today</label>
+                <select id="auto-focus">
+                    <option value="deep-work">Deep Work & Concentration</option>
+                    <option value="creative">Creative Work & Brainstorming</option>
+                    <option value="meetings">Meetings & Collaboration</option>
+                    <option value="learning">Learning & Skill Development</option>
+                    <option value="balanced">Balanced Mix of Activities</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="auto-energy"><i class="fas fa-battery-full"></i> Energy Level Today</label>
+                <select id="auto-energy">
+                    <option value="high">High Energy - Can tackle challenging tasks</option>
+                    <option value="medium">Medium Energy - Balanced workload</option>
+                    <option value="low">Low Energy - Need lighter tasks</option>
+                    <option value="varied">Varied - Energy fluctuates throughout day</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="auto-tasks"><i class="fas fa-tasks"></i> Key Tasks to Schedule (comma separated)</label>
+                <textarea id="auto-tasks" placeholder="Project planning, Team meeting, Gym session, Learning time..." rows="3"></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label><i class="fas fa-clock"></i> Work Hours</label>
+                <div style="display: flex; gap: 15px;">
+                    <div style="flex: 1;">
+                        <label style="font-size: 14px; margin-bottom: 5px; display: block;">Start Time</label>
+                        <input type="time" id="auto-start" value="09:00" style="width: 100%;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="font-size: 14px; margin-bottom: 5px; display: block;">End Time</label>
+                        <input type="time" id="auto-end" value="18:00" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label><i class="fas fa-coffee"></i> Break Preferences</label>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 10px;">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="auto-morning-break" checked>
+                        <span>Morning Break</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="auto-lunch-break" checked>
+                        <span>Lunch Break</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="auto-afternoon-break" checked>
+                        <span>Afternoon Break</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 15px; margin-top: 30px;">
+                <button class="btn btn-secondary" id="cancel-auto-schedule" style="flex: 1;">
+                    Cancel
+                </button>
+                <button class="btn" id="generate-auto-schedule" style="flex: 2;">
+                    <i class="fas fa-magic"></i> Generate AI Schedule
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Event Details Modal -->
+    <div class="auto-schedule-modal" id="event-details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-calendar-check"></i> Schedule Item Details</h3>
+                <button class="close-modal" id="close-event-details">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="event-details-content">
+                <!-- Event details will be populated by JavaScript -->
+            </div>
+            
+            <div style="display: flex; gap: 15px; margin-top: 30px;">
+                <button class="btn btn-secondary" id="delete-event" style="flex: 1;">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+                <button class="btn" id="edit-event" style="flex: 1;">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="btn btn-secondary" id="close-event-modal" style="flex: 1;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+    
+    <script>
+        // DOM Elements
+        let user = null;
+        let currentDate = new Date();
+        let unsubscribeFunctions = [];
+        let events = [];
+        let notifications = [];
+        
+        // Check authentication state
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup Firebase auth state listener
+            firebaseAuth.setupAuthStateListener();
+            
+            // Get current user
+            user = firebaseAuth.getCurrentUser();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            updateUserProfile();
+            setupRealTimeListeners();
+            initializeSchedule();
+            setupEventListeners();
+            requestNotificationPermission();
+            
+            // Set online status
+            setUserOnlineStatus(true);
+        });
+        
+        // Update user profile in UI
+        function updateUserProfile() {
+            const userData = JSON.parse(localStorage.getItem('user')) || {};
+            
+            document.getElementById('user-name').textContent = user.displayName || userData.displayName || 'User';
+            document.getElementById('user-email').textContent = user.email;
+            
+            // Update avatar
+            const avatarUrl = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName || user.email)}&background=667eea&color=fff&size=150`;
+            document.getElementById('user-avatar').src = avatarUrl;
+            
+            // Update current date
+            updateDateDisplay();
+        }
+        
+        // Update date display
+        function updateDateDisplay() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = currentDate.toLocaleDateString('en-US', options);
+            document.getElementById('current-date').textContent = dateString;
+            document.getElementById('calendar-date').textContent = dateString;
+        }
+        
+        // Set user online status
+        async function setUserOnlineStatus(isOnline) {
+            if (!user) return;
+            
+            const userStatusRef = firebaseAuth.db.collection('status').doc(user.uid);
+            const isOfflineForFirestore = {
+                state: isOnline ? 'online' : 'offline',
+                last_changed: firebase.firestore.FieldValue.serverTimestamp(),
+                userId: user.uid,
+                userName: user.displayName || user.email
+            };
+            
+            // Set status
+            await userStatusRef.set(isOfflineForFirestore);
+            
+            // Update presence in UI
+            document.getElementById('user-status').style.display = 'block';
+            
+            // Listen for other users' status
+            const statusUnsubscribe = firebaseAuth.db.collection('status').where('state', '==', 'online')
+                .onSnapshot((snapshot) => {
+                    const onlineCount = snapshot.size;
+                    document.getElementById('online-count').textContent = onlineCount;
+                });
+            
+            unsubscribeFunctions.push(statusUnsubscribe);
+        }
+        
+        // Setup real-time listeners
+        function setupRealTimeListeners() {
+            if (!user) return;
+            
+            // Listen for schedule events
+            const eventsUnsubscribe = firebaseAuth.setupRealtimeListener(
+                user.uid,
+                'scheduleEvents',
+                (eventsData) => {
+                    events = eventsData;
+                    renderSchedule();
+                    updateTimeSlots();
+                    calculateTimeStatistics();
+                }
+            );
+            
+            unsubscribeFunctions.push(eventsUnsubscribe);
+            
+            // Listen for notifications
+            const notificationsUnsubscribe = firebaseAuth.setupRealtimeListener(
+                user.uid,
+                'notifications',
+                (notificationsData) => {
+                    notifications = notificationsData;
+                    renderNotifications();
+                }
+            );
+            
+            unsubscribeFunctions.push(notificationsUnsubscribe);
+        }
+        
+        // Initialize schedule
+        function initializeSchedule() {
+            renderCalendarGrid();
+            updateTimeSlots();
+            
+            // Load today's events from Firebase
+            loadTodayEvents();
+            
+            // Check for upcoming notifications
+            checkUpcomingNotifications();
+        }
+        
+        // Render calendar grid
+        function renderCalendarGrid() {
+            const calendarGrid = document.getElementById('calendar-grid');
+            calendarGrid.innerHTML = '';
+            
+            // Time labels column
+            const timeColumn = document.createElement('div');
+            timeColumn.className = 'time-column';
+            
+            // Schedule column
+            const scheduleColumn = document.createElement('div');
+            scheduleColumn.className = 'schedule-column';
+            
+            // Create time blocks from 6 AM to 10 PM
+            for (let hour = 6; hour <= 22; hour++) {
+                const timeLabel = document.createElement('div');
+                timeLabel.className = 'time-label';
+                timeLabel.textContent = formatHour(hour);
+                timeColumn.appendChild(timeLabel);
+                
+                const timeBlock = document.createElement('div');
+                timeBlock.className = 'time-block';
+                timeBlock.dataset.hour = hour;
+                scheduleColumn.appendChild(timeBlock);
+            }
+            
+            calendarGrid.appendChild(timeColumn);
+            calendarGrid.appendChild(scheduleColumn);
+            
+            // Render events on the grid
+            renderEventsOnGrid();
+        }
+        
+        // Format hour for display
+        function formatHour(hour) {
+            if (hour === 12) return '12 PM';
+            if (hour > 12) return `${hour - 12} PM`;
+            if (hour === 0) return '12 AM';
+            return `${hour} AM`;
+        }
+        
+        // Render events on the grid
+        function renderEventsOnGrid() {
+            // Clear existing events
+            document.querySelectorAll('.event').forEach(event => event.remove());
+            
+            // Filter events for current date
+            const currentDateString = currentDate.toISOString().split('T')[0];
+            const todayEvents = events.filter(event => event.date === currentDateString);
+            
+            todayEvents.forEach(event => {
+                const startHour = parseInt(event.startTime.split(':')[0]);
+                const startMinute = parseInt(event.startTime.split(':')[1]);
+                const endHour = parseInt(event.endTime.split(':')[0]);
+                const endMinute = parseInt(event.endTime.split(':')[1]);
+                
+                // Calculate position and height
+                const startPosition = (startHour - 6) * 60 + startMinute;
+                const endPosition = (endHour - 6) * 60 + endMinute;
+                const duration = endPosition - startPosition;
+                
+                // Create event element
+                const eventElement = document.createElement('div');
+                eventElement.className = `event ${event.category}`;
+                eventElement.style.top = `${startPosition}px`;
+                eventElement.style.height = `${duration}px`;
+                eventElement.dataset.eventId = event.id;
+                
+                eventElement.innerHTML = `
+                    <div class="event-title">${event.title}</div>
+                    <div class="event-time">${event.startTime} - ${event.endTime}</div>
+                    <div class="event-actions">
+                        <button class="edit-event"><i class="fas fa-edit"></i></button>
+                        <button class="delete-event"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                
+                // Add click event to show details
+                eventElement.addEventListener('click', (e) => {
+                    if (!e.target.closest('.event-actions')) {
+                        showEventDetails(event.id);
+                    }
+                });
+                
+                // Add edit and delete handlers
+                eventElement.querySelector('.edit-event').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    editEvent(event.id);
+                });
+                
+                eventElement.querySelector('.delete-event').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteEvent(event.id);
+                });
+                
+                // Add to schedule column
+                document.querySelector('.schedule-column').appendChild(eventElement);
+            });
+        }
+        
+        // Update time slots sidebar
+        function updateTimeSlots() {
+            const timeSlotsList = document.getElementById('time-slots-list');
+            timeSlotsList.innerHTML = '';
+            
+            const currentDateString = currentDate.toISOString().split('T')[0];
+            const todayEvents = events.filter(event => event.date === currentDateString);
+            
+            // Create time slots for each hour
+            for (let hour = 6; hour <= 22; hour++) {
+                const timeSlot = document.createElement('div');
+                timeSlot.className = 'time-slot';
+                
+                const hourDisplay = formatHour(hour);
+                const nextHourDisplay = formatHour(hour + 1);
+                
+                // Check if there's an event in this time slot
+                const hasEvent = todayEvents.some(event => {
+                    const eventStartHour = parseInt(event.startTime.split(':')[0]);
+                    const eventEndHour = parseInt(event.endTime.split(':')[0]);
+                    return hour >= eventStartHour && hour < eventEndHour;
+                });
+                
+                // Determine status
+                let status = 'available';
+                let statusText = 'Available';
+                
+                if (hasEvent) {
+                    const eventInSlot = todayEvents.find(event => {
+                        const eventStartHour = parseInt(event.startTime.split(':')[0]);
+                        const eventEndHour = parseInt(event.endTime.split(':')[0]);
+                        return hour >= eventStartHour && hour < eventEndHour;
+                    });
+                    
+                    if (eventInSlot) {
+                        if (eventInSlot.category === 'break') {
+                            status = 'break';
+                            statusText = 'Break';
+                        } else {
+                            status = 'busy';
+                            statusText = eventInSlot.title;
+                        }
+                    }
+                }
+                
+                timeSlot.innerHTML = `
+                    <div>
+                        <div class="time">${hourDisplay} - ${nextHourDisplay}</div>
+                        <div class="status ${status}">${statusText}</div>
+                    </div>
+                    <i class="fas fa-plus" style="color: var(--gray-color); font-size: 14px;"></i>
+                `;
+                
+                // Add click event to schedule at this time
+                timeSlot.addEventListener('click', () => {
+                    document.getElementById('event-start').value = `${hour.toString().padStart(2, '0')}:00`;
+                    document.getElementById('event-end').value = `${(hour + 1).toString().padStart(2, '0')}:00`;
+                    document.getElementById('event-title').focus();
+                });
+                
+                timeSlotsList.appendChild(timeSlot);
+            }
+        }
+        
+        // Calculate time statistics
+        function calculateTimeStatistics() {
+            const currentDateString = currentDate.toISOString().split('T')[0];
+            const todayEvents = events.filter(event => event.date === currentDateString);
+            
+            let totalWorkTime = 0; // in minutes
+            let totalBreakTime = 0;
+            let completedTasks = 0;
+            
+            todayEvents.forEach(event => {
+                const startHour = parseInt(event.startTime.split(':')[0]);
+                const startMinute = parseInt(event.startTime.split(':')[1]);
+                const endHour = parseInt(event.endTime.split(':')[0]);
+                const endMinute = parseInt(event.endTime.split(':')[1]);
+                
+                const duration = (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
+                
+                if (event.category === 'break') {
+                    totalBreakTime += duration;
+                } else {
+                    totalWorkTime += duration;
+                }
+                
+                if (event.completed) {
+                    completedTasks++;
+                }
+            });
+            
+            // Update UI
+            document.getElementById('total-work-time').textContent = 
+                `${Math.floor(totalWorkTime / 60)}h ${totalWorkTime % 60}m`;
+            
+            document.getElementById('break-time').textContent = 
+                `${totalBreakTime}m`;
+            
+            document.getElementById('tasks-completed').textContent = completedTasks;
+            
+            // Calculate productivity score
+            const workHours = totalWorkTime / 60;
+            const productivityScore = Math.min(Math.round((workHours / 8) * 100), 100);
+            document.getElementById('productivity-score').textContent = `${productivityScore}%`;
+        }
+        
+        // Load today's events
+        async function loadTodayEvents() {
+            if (!user) return;
+            
+            const today = currentDate.toISOString().split('T')[0];
+            
+            try {
+                const snapshot = await firebaseAuth.db.collection('users').doc(user.uid)
+                    .collection('scheduleEvents')
+                    .where('date', '==', today)
+                    .orderBy('startTime')
+                    .get();
+                
+                events = [];
+                snapshot.forEach(doc => {
+                    events.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                renderEventsOnGrid();
+                updateTimeSlots();
+                calculateTimeStatistics();
+                
+            } catch (error) {
+                console.error('Error loading events:', error);
+            }
+        }
+        
+        // Render notifications
+        function renderNotifications() {
+            const notificationsList = document.getElementById('notifications-list');
+            const today = currentDate.toISOString().split('T')[0];
+            
+            // Filter notifications for today
+            const todayNotifications = notifications.filter(notification => 
+                notification.date === today || !notification.date
+            );
+            
+            if (todayNotifications.length === 0) {
+                notificationsList.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--gray-color);">
+                        <i class="fas fa-bell-slash" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p>No notifications scheduled for today</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            notificationsList.innerHTML = todayNotifications.map(notification => `
+                <div class="notification-item">
+                    <div class="notification-info">
+                        <h5>${notification.title}</h5>
+                        <p>${notification.description || 'Schedule reminder'}</p>
+                    </div>
+                    <div class="notification-time">
+                        <span style="font-weight: 600; color: var(--dark-color);">${notification.time}</span>
+                        ${notification.offset ? `<span style="color: var(--gray-color); font-size: 13px;"> (${notification.offset} before)</span>` : ''}
+                    </div>
+                    <div class="notification-actions">
+                        <button class="btn-icon edit-notification" data-id="${notification.id}" style="width: 36px; height: 36px;">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-icon delete-notification" data-id="${notification.id}" style="width: 36px; height: 36px; background-color: rgba(231, 76, 60, 0.1); color: var(--danger-color);">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Add event listeners to notification buttons
+            document.querySelectorAll('.edit-notification').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const notificationId = e.currentTarget.dataset.id;
+                    editNotification(notificationId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-notification').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const notificationId = e.currentTarget.dataset.id;
+                    deleteNotification(notificationId);
+                });
+            });
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Schedule form submission
+            document.getElementById('schedule-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await addNewEvent();
+            });
+            
+            // Clear form button
+            document.getElementById('clear-form').addEventListener('click', () => {
+                document.getElementById('schedule-form').reset();
+                document.getElementById('event-start').value = '09:00';
+                document.getElementById('event-end').value = '10:00';
+                document.getElementById('event-notification').checked = true;
+            });
+            
+            // Auto-schedule button
+            document.getElementById('auto-schedule-btn').addEventListener('click', () => {
+                document.getElementById('auto-schedule-modal').classList.add('show');
+            });
+            
+            // Calendar navigation
+            document.getElementById('prev-day').addEventListener('click', () => {
+                currentDate.setDate(currentDate.getDate() - 1);
+                updateDateDisplay();
+                loadTodayEvents();
+            });
+            
+            document.getElementById('next-day').addEventListener('click', () => {
+                currentDate.setDate(currentDate.getDate() + 1);
+                updateDateDisplay();
+                loadTodayEvents();
+            });
+            
+            document.getElementById('today-btn').addEventListener('click', () => {
+                currentDate = new Date();
+                updateDateDisplay();
+                loadTodayEvents();
+            });
+            
+            // Test notification button
+            document.getElementById('test-notification').addEventListener('click', () => {
+                sendTestNotification();
+            });
+            
+            // Modal close buttons
+            document.getElementById('close-auto-schedule').addEventListener('click', () => {
+                document.getElementById('auto-schedule-modal').classList.remove('show');
+            });
+            
+            document.getElementById('cancel-auto-schedule').addEventListener('click', () => {
+                document.getElementById('auto-schedule-modal').classList.remove('show');
+            });
+            
+            document.getElementById('close-event-details').addEventListener('click', () => {
+                document.getElementById('event-details-modal').classList.remove('show');
+            });
+            
+            document.getElementById('close-event-modal').addEventListener('click', () => {
+                document.getElementById('event-details-modal').classList.remove('show');
+            });
+            
+            // Generate auto schedule
+            document.getElementById('generate-auto-schedule').addEventListener('click', async () => {
+                await generateAutoSchedule();
+            });
+            
+            // Delete event button
+            document.getElementById('delete-event').addEventListener('click', async () => {
+                const eventId = document.getElementById('event-details-modal').dataset.eventId;
+                if (eventId) {
+                    await deleteEvent(eventId);
+                    document.getElementById('event-details-modal').classList.remove('show');
+                }
+            });
+            
+            // Edit event button
+            document.getElementById('edit-event').addEventListener('click', () => {
+                const eventId = document.getElementById('event-details-modal').dataset.eventId;
+                if (eventId) {
+                    editEvent(eventId);
+                    document.getElementById('event-details-modal').classList.remove('show');
+                }
+            });
+            
+            // Close modal on outside click
+            document.querySelectorAll('.auto-schedule-modal').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('show');
+                    }
+                });
+            });
+        }
+        
+        // Add new event
+        async function addNewEvent() {
+            if (!user) return;
+            
+            const title = document.getElementById('event-title').value;
+            const category = document.getElementById('event-category').value;
+            const startTime = document.getElementById('event-start').value;
+            const endTime = document.getElementById('event-end').value;
+            const description = document.getElementById('event-description').value;
+            const enableNotification = document.getElementById('event-notification').checked;
+            
+            // Validate time
+            if (startTime >= endTime) {
+                alert('End time must be after start time');
+                return;
+            }
+            
+            const eventData = {
+                title,
+                category,
+                startTime,
+                endTime,
+                description,
+                date: currentDate.toISOString().split('T')[0],
+                completed: false,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                userId: user.uid
+            };
+            
+            try {
+                // Add event to Firestore
+                const eventRef = await firebaseAuth.db.collection('users').doc(user.uid)
+                    .collection('scheduleEvents')
+                    .add(eventData);
+                
+                // Create notification if enabled
+                if (enableNotification) {
+                    await createNotification({
+                        title: `Reminder: ${title}`,
+                        description: description || `Scheduled from ${startTime} to ${endTime}`,
+                        time: startTime,
+                        offset: '5 minutes',
+                        date: currentDate.toISOString().split('T')[0],
+                        eventId: eventRef.id,
+                        type: 'schedule',
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        userId: user.uid
+                    });
+                }
+                
+                // Log activity
+                await firebaseAuth.logActivity(user.uid, {
+                    type: 'schedule',
+                    action: 'add_event',
+                    message: `Added "${title}" to schedule`
+                });
+                
+                // Reset form
+                document.getElementById('schedule-form').reset();
+                document.getElementById('event-start').value = '09:00';
+                document.getElementById('event-end').value = '10:00';
+                document.getElementById('event-notification').checked = true;
+                
+                // Show success message
+                showToast('Event added to schedule successfully!');
+                
+            } catch (error) {
+                console.error('Error adding event:', error);
+                alert('Error adding event: ' + error.message);
+            }
+        }
+        
+        // Create notification
+        async function createNotification(notificationData) {
+            if (!user) return;
+            
+            try {
+                await firebaseAuth.db.collection('users').doc(user.uid)
+                    .collection('notifications')
+                    .add(notificationData);
+                
+                // Schedule browser notification
+                scheduleBrowserNotification(notificationData);
+                
+            } catch (error) {
+                console.error('Error creating notification:', error);
+            }
+        }
+        
+        // Schedule browser notification
+        function scheduleBrowserNotification(notificationData) {
+            if (!('Notification' in window)) {
+                console.log('This browser does not support notifications');
+                return;
+            }
+            
+            const notificationTime = new Date(`${notificationData.date}T${notificationData.time}`);
+            
+            // Adjust for offset
+            if (notificationData.offset) {
+                const offsetMinutes = parseInt(notificationData.offset);
+                if (!isNaN(offsetMinutes)) {
+                    notificationTime.setMinutes(notificationTime.getMinutes() - offsetMinutes);
+                }
+            }
+            
+            const now = new Date();
+            const timeUntilNotification = notificationTime.getTime() - now.getTime();
+            
+            if (timeUntilNotification > 0 && timeUntilNotification <= 24 * 60 * 60 * 1000) {
+                setTimeout(() => {
+                    if (Notification.permission === 'granted') {
+                        new Notification(notificationData.title, {
+                            body: notificationData.description,
+                            icon: 'https://ui-avatars.com/api/?name=Daily+Work+AI&background=667eea&color=fff',
+                            tag: 'daily-work-ai'
+                        });
+                    }
+                }, timeUntilNotification);
+            }
+        }
+        
+        // Show event details
+        async function showEventDetails(eventId) {
+            if (!user || !eventId) return;
+            
+            try {
+                const eventDoc = await firebaseAuth.db.collection('users').doc(user.uid)
+                    .collection('scheduleEvents')
+                    .doc(eventId)
+                    .get();
+                
+                if (eventDoc.exists) {
+                    const event = eventDoc.data();
+                    
+                    const categoryIcons = {
+                        work: 'fas fa-briefcase',
+                        personal: 'fas fa-user',
+                        meeting: 'fas fa-users',
+                        break: 'fas fa-coffee',
+                        learning: 'fas fa-graduation-cap',
+                        exercise: 'fas fa-running'
+                    };
+                    
+                    const categoryColors = {
+                        work: '#667eea',
+                        personal: '#43e97b',
+                        meeting: '#f093fb',
+                        break: '#fa709a',
+                        learning: '#4facfe',
+                        exercise: '#f39c12'
+                    };
+                    
+                    document.getElementById('event-details-content').innerHTML = `
+                        <div style="margin-bottom: 25px;">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; background-color: ${categoryColors[event.category] || '#667eea'}; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                                    <i class="${categoryIcons[event.category] || 'fas fa-calendar'}"></i>
+                                </div>
+                                <div>
+                                    <h4 style="margin: 0; color: var(--dark-color);">${event.title}</h4>
+                                    <p style="margin: 5px 0 0; color: var(--gray-color); text-transform: capitalize;">${event.category}</p>
+                                </div>
+                            </div>
+                            
+                            <div style="background-color: #f8fafc; padding: 20px; border-radius: var(--border-radius); margin-top: 20px;">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                                    <div>
+                                        <div style="font-size: 12px; color: var(--gray-color); margin-bottom: 5px;">Start Time</div>
+                                        <div style="font-weight: 600; color: var(--dark-color);">${event.startTime}</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 12px; color: var(--gray-color); margin-bottom: 5px;">End Time</div>
+                                        <div style="font-weight: 600; color: var(--dark-color);">${event.endTime}</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 12px; color: var(--gray-color); margin-bottom: 5px;">Date</div>
+                                        <div style="font-weight: 600; color: var(--dark-color);">${new Date(event.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                                    </div>
+                                </div>
+                                
+                                ${event.description ? `
+                                    <div>
+                                        <div style="font-size: 12px; color: var(--gray-color); margin-bottom: 5px;">Description</div>
+                                        <div style="color: var(--dark-color); line-height: 1.6;">${event.description}</div>
+                                    </div>
+                                ` : ''}
+                                
+                                <div style="margin-top: 20px; display: flex; align-items: center; gap: 10px;">
+                                    <div style="font-size: 12px; color: var(--gray-color);">Status:</div>
+                                    <div style="padding: 5px 15px; background-color: ${event.completed ? 'rgba(46, 204, 113, 0.1)' : 'rgba(243, 156, 18, 0.1)'}; color: ${event.completed ? '#2ecc71' : '#f39c12'}; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                                        ${event.completed ? 'Completed' : 'Pending'}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.getElementById('event-details-modal').dataset.eventId = eventId;
+                    document.getElementById('event-details-modal').classList.add('show');
+                }
+            } catch (error) {
+                console.error('Error loading event details:', error);
+            }
+        }
+        
+        // Edit event
+        function editEvent(eventId) {
+            // Find the event
+            const event = events.find(e => e.id === eventId);
+            if (!event) return;
+            
+            // Populate form with event data
+            document.getElementById('event-title').value = event.title;
+            document.getElementById('event-category').value = event.category;
+            document.getElementById('event-start').value = event.startTime;
+            document.getElementById('event-end').value = event.endTime;
+            document.getElementById('event-description').value = event.description || '';
+            
+            // Scroll to form
+            document.querySelector('.quick-schedule-form').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('event-title').focus();
+            
+            // Show message
+            showToast('Edit the event details and click "Add to Schedule" to update');
+        }
+        
+        // Delete event
+        async function deleteEvent(eventId) {
+            if (!user || !eventId) return;
+            
+            if (!confirm('Are you sure you want to delete this event?')) {
+                return;
+            }
+            
+            try {
+                // Delete event from Firestore
+                await firebaseAuth.db.collection('users').doc(user.uid)
+                    .collection('scheduleEvents')
+                    .doc(eventId)
+                    .delete();
+                
+                // Delete associated notifications
+                const notificationsSnapshot = await firebaseAuth.db.collection('users').doc(user.uid)
+                    .collection('notifications')
+                    .where('eventId', '==', eventId)
+                    .get();
+                
+                const deletePromises = notificationsSnapshot.docs.map(doc => doc.ref.delete());
+                await Promise.all(deletePromises);
+                
+                // Log activity
+                await firebaseAuth.logActivity(user.uid, {
+                    type: 'schedule',
+                    action: 'delete_event',
+                    message: 'Deleted event from schedule'
+                });
+                
+                showToast('Event deleted successfully!');
+                
+            } catch (error) {
+                console.error('Error deleting event:', error);
+                alert('Error deleting event: ' + error.message);
+            }
+        }
+        
+        // Edit notification
+        function editNotification(notificationId) {
+            // Find the notification
+            const notification = notifications.find(n => n.id === notificationId);
+            if (!notification) return;
+            
+            alert('Edit notification feature will be implemented in the next version');
+        }
+        
+        // Delete notification
+        async function deleteNotification(notificationId) {
+            if (!user || !notificationId) return;
+            
+            if (!confirm('Are you sure you want to delete this notification?')) {
+                return;
+            }
+            
+            try {
+                await firebaseAuth.db.collection('users').doc(user.uid)
+                    .collection('notifications')
+                    .doc(notificationId)
+                    .delete();
+                
+                showToast('Notification deleted successfully!');
+                
+            } catch (error) {
+                console.error('Error deleting notification:', error);
+                alert('Error deleting notification: ' + error.message);
+            }
+        }
+        
+        // Generate auto schedule
+        async function generateAutoSchedule() {
+            if (!user) return;
+            
+            const focus = document.getElementById('auto-focus').value;
+            const energy = document.getElementById('auto-energy').value;
+            const tasks = document.getElementById('auto-tasks').value;
+            const startTime = document.getElementById('auto-start').value;
+            const endTime = document.getElementById('auto-end').value;
+            const morningBreak = document.getElementById('auto-morning-break').checked;
+            const lunchBreak = document.getElementById('auto-lunch-break').checked;
+            const afternoonBreak = document.getElementById('auto-afternoon-break').checked;
+            
+            const taskList = tasks.split(',').map(task => task.trim()).filter(task => task);
+            
+            if (taskList.length === 0) {
+                alert('Please enter at least one task to schedule');
+                return;
+            }
+            
+            // Show loading state
+            const generateBtn = document.getElementById('generate-auto-schedule');
+            const originalText = generateBtn.innerHTML;
+            generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            generateBtn.disabled = true;
+            
+            try {
+                // Generate schedule based on parameters
+                const schedule = await generateAIScheduleLogic({
+                    focus,
+                    energy,
+                    tasks: taskList,
+                    startTime,
+                    endTime,
+                    morningBreak,
+                    lunchBreak,
+                    afternoonBreak
+                });
+                
+                // Add generated events to Firestore
+                const date = currentDate.toISOString().split('T')[0];
+                const addPromises = schedule.map(async (event, index) => {
+                    const eventData = {
+                        title: event.title,
+                        category: event.category,
+                        startTime: event.startTime,
+                        endTime: event.endTime,
+                        description: event.description,
+                        date,
+                        completed: false,
+                        isAutoGenerated: true,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        userId: user.uid
+                    };
+                    
+                    const eventRef = await firebaseAuth.db.collection('users').doc(user.uid)
+                        .collection('scheduleEvents')
+                        .add(eventData);
+                    
+                    // Add notification for the event
+                    if (event.notification) {
+                        await createNotification({
+                            title: `Reminder: ${event.title}`,
+                            description: event.description || `Scheduled from ${event.startTime} to ${event.endTime}`,
+                            time: event.startTime,
+                            offset: '5 minutes',
+                            date,
+                            eventId: eventRef.id,
+                            type: 'schedule',
+                            isAutoGenerated: true,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                            userId: user.uid
+                        });
+                    }
+                    
+                    return eventRef;
+                });
+                
+                await Promise.all(addPromises);
+                
+                // Log activity
+                await firebaseAuth.logActivity(user.uid, {
+                    type: 'ai',
+                    action: 'generate_schedule',
+                    message: 'Generated AI-powered schedule'
+                });
+                
+                // Close modal and show success
+                document.getElementById('auto-schedule-modal').classList.remove('show');
+                showToast('AI schedule generated successfully!');
+                
+            } catch (error) {
+                console.error('Error generating schedule:', error);
+                alert('Error generating schedule: ' + error.message);
+            } finally {
+                // Reset button state
+                generateBtn.innerHTML = originalText;
+                generateBtn.disabled = false;
+            }
+        }
+        
+        // AI Schedule Generation Logic
+        async function generateAIScheduleLogic(params) {
+            const { focus, energy, tasks, startTime, endTime, morningBreak, lunchBreak, afternoonBreak } = params;
+            
+            const startHour = parseInt(startTime.split(':')[0]);
+            const endHour = parseInt(endTime.split(':')[0]);
+            const totalHours = endHour - startHour;
+            
+            // Calculate time slots based on energy level
+            let workSessionLength, breakLength;
+            
+            switch (energy) {
+                case 'high':
+                    workSessionLength = 90; // 1.5 hours
+                    breakLength = 15; // 15 minutes
+                    break;
+                case 'medium':
+                    workSessionLength = 60; // 1 hour
+                    breakLength = 10; // 10 minutes
+                    break;
+                case 'low':
+                    workSessionLength = 45; // 45 minutes
+                    breakLength = 15; // 15 minutes
+                    break;
+                default:
+                    workSessionLength = 60;
+                    breakLength = 10;
+            }
+            
+            const schedule = [];
+            let currentTime = startHour * 60; // Convert to minutes
+            
+            // Add morning routine if early start
+            if (startHour <= 8) {
+                schedule.push({
+                    title: 'Morning Routine',
+                    category: 'personal',
+                    startTime: formatMinutesToTime(currentTime),
+                    endTime: formatMinutesToTime(currentTime + 30),
+                    description: 'Start your day with intention',
+                    notification: true
+                });
+                currentTime += 30;
+            }
+            
+            // Add work sessions for each task
+            tasks.forEach((task, index) => {
+                // Determine category based on focus
+                let category = 'work';
+                if (focus === 'creative' && index === 0) category = 'creative';
+                if (focus === 'learning' && index === 0) category = 'learning';
+                
+                // Add work session
+                schedule.push({
+                    title: task,
+                    category: category,
+                    startTime: formatMinutesToTime(currentTime),
+                    endTime: formatMinutesToTime(currentTime + workSessionLength),
+                    description: getTaskDescription(task, focus),
+                    notification: true
+                });
+                currentTime += workSessionLength;
+                
+                // Add break if not the last task and break conditions are met
+                if (index < tasks.length - 1) {
+                    // Check for specific breaks
+                    const currentHour = Math.floor(currentTime / 60);
+                    
+                    if (morningBreak && currentHour === 10) { // 10 AM break
+                        schedule.push({
+                            title: 'Morning Break',
+                            category: 'break',
+                            startTime: formatMinutesToTime(currentTime),
+                            endTime: formatMinutesToTime(currentTime + breakLength),
+                            description: 'Take a short break to recharge',
+                            notification: false
+                        });
+                        currentTime += breakLength;
+                    }
+                    
+                    if (lunchBreak && currentHour === 12) { // 12 PM lunch
+                        schedule.push({
+                            title: 'Lunch Break',
+                            category: 'break',
+                            startTime: formatMinutesToTime(currentTime),
+                            endTime: formatMinutesToTime(currentTime + 60), // 1 hour lunch
+                            description: 'Take a proper lunch break',
+                            notification: true
+                        });
+                        currentTime += 60;
+                    }
+                    
+                    if (afternoonBreak && currentHour === 15) { // 3 PM break
+                        schedule.push({
+                            title: 'Afternoon Break',
+                            category: 'break',
+                            startTime: formatMinutesToTime(currentTime),
+                            endTime: formatMinutesToTime(currentTime + breakLength),
+                            description: 'Afternoon energy boost',
+                            notification: false
+                        });
+                        currentTime += breakLength;
+                    }
+                    
+                    // Add regular break between tasks
+                    schedule.push({
+                        title: 'Short Break',
+                        category: 'break',
+                        startTime: formatMinutesToTime(currentTime),
+                        endTime: formatMinutesToTime(currentTime + breakLength),
+                        description: 'Rest before next task',
+                        notification: false
+                    });
+                    currentTime += breakLength;
+                }
+            });
+            
+            // Add review session at the end
+            schedule.push({
+                title: 'Daily Review & Planning',
+                category: 'work',
+                startTime: formatMinutesToTime(currentTime),
+                endTime: formatMinutesToTime(currentTime + 30),
+                description: 'Review today and plan for tomorrow',
+                notification: true
+            });
+            
+            return schedule;
+        }
+        
+        // Helper function to format minutes to time string
+        function formatMinutesToTime(minutes) {
+            const hour = Math.floor(minutes / 60);
+            const minute = minutes % 60;
+            return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+        }
+        
+        // Helper function to get task description
+        function getTaskDescription(task, focus) {
+            const descriptions = {
+                'deep-work': 'Focus on deep work without distractions',
+                'creative': 'Creative thinking and brainstorming session',
+                'meetings': 'Collaboration and communication time',
+                'learning': 'Skill development and knowledge acquisition',
+                'balanced': 'Balanced work session'
+            };
+            
+            return descriptions[focus] || 'Work session';
+        }
+        
+        // Send test notification
+        function sendTestNotification() {
+            if (!('Notification' in window)) {
+                alert('This browser does not support notifications');
+                return;
+            }
+            
+            if (Notification.permission === 'granted') {
+                new Notification('Daily Work AI - Test Notification', {
+                    body: 'This is a test notification from your Daily Schedule. All notification systems are working correctly!',
+                    icon: 'https://ui-avatars.com/api/?name=Daily+Work+AI&background=667eea&color=fff',
+                    tag: 'test-notification'
+                });
+                
+                showToast('Test notification sent successfully!');
+            } else if (Notification.permission !== 'denied') {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        sendTestNotification();
+                    }
+                });
+            } else {
+                alert('Please enable notifications in your browser settings to receive schedule reminders.');
+            }
+        }
+        
+        // Request notification permission
+        function requestNotificationPermission() {
+            if (!('Notification' in window)) {
+                console.log('This browser does not support notifications');
+                return;
+            }
+            
+            if (Notification.permission === 'default') {
+                // Don't request immediately - wait for user interaction
+                console.log('Notification permission is default');
+            }
+        }
+        
+        // Check for upcoming notifications
+        function checkUpcomingNotifications() {
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            const currentDateString = now.toISOString().split('T')[0];
+            
+            // Check events starting in the next 15 minutes
+            const upcomingEvents = events.filter(event => {
+                if (event.date !== currentDateString || event.completed) return false;
+                
+                const eventStartTime = parseInt(event.startTime.split(':')[0]) * 60 + 
+                                      parseInt(event.startTime.split(':')[1]);
+                
+                return eventStartTime > currentTime && eventStartTime <= currentTime + 15;
+            });
+            
+            // Show reminders for upcoming events
+            upcomingEvents.forEach(event => {
+                const minutesUntil = Math.round((parseInt(event.startTime.split(':')[0]) * 60 + 
+                                               parseInt(event.startTime.split(':')[1]) - currentTime) / 60);
+                
+                if (minutesUntil <= 15 && minutesUntil > 0) {
+                    showToast(`Reminder: "${event.title}" starts in ${minutesUntil} minutes`, 'info');
+                }
+            });
+        }
+        
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            // Remove existing toast
+            const existingToast = document.querySelector('.toast-notification');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            // Create toast
+            const toast = document.createElement('div');
+            toast.className = `toast-notification ${type}`;
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background: ${type === 'success' ? '#2ecc71' : type === 'info' ? '#3498db' : '#e74c3c'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow-lg);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                animation: slideIn 0.3s ease;
+                max-width: 400px;
+            `;
+            
+            const icon = type === 'success' ? 'fas fa-check-circle' : 
+                         type === 'info' ? 'fas fa-info-circle' : 'fas fa-exclamation-circle';
+            
+            toast.innerHTML = `
+                <i class="${icon}" style="font-size: 20px;"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Remove toast after 5 seconds
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.remove();
+                        }
+                    }, 300);
+                }
+            }, 5000);
+            
+            // Add CSS for animations
+            if (!document.querySelector('#toast-animations')) {
+                const style = document.createElement('style');
+                style.id = 'toast-animations';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+        
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            // Set offline status
+            await setUserOnlineStatus(false);
+            
+            // Unsubscribe all listeners
+            unsubscribeFunctions.forEach(unsubscribe => unsubscribe());
+            
+            // Sign out
+            await firebaseAuth.signOut();
+        });
+        
+        // Handle page visibility change
+        document.addEventListener('visibilitychange', async () => {
+            if (document.visibilityState === 'hidden') {
+                await setUserOnlineStatus(false);
+            } else if (user) {
+                await setUserOnlineStatus(true);
+                // Check for notifications when tab becomes visible
+                checkUpcomingNotifications();
+            }
+        });
+        
+        // Handle before unload
+        window.addEventListener('beforeunload', async () => {
+            await setUserOnlineStatus(false);
+        });
+        
+        // Initialize toast animations
+        const toastStyle = document.createElement('style');
+        toastStyle.textContent = `
+            .toast-notification {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background: #2ecc71;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                animation: slideIn 0.3s ease;
+                max-width: 400px;
+            }
+            
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(toastStyle);
+    </script>
+<!-- Add these scripts in order -->
+<script src="auth-manager.js"></script>
+<script src="common-header.js"></script>
+<script src="navigation.js"></script>
+
+<script>
+    // Initialize page-specific functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check authentication state
+        const user = window.authManager?.getCurrentUser();
+        
+        if (!user && !window.location.pathname.includes('index.html') && 
+            !window.location.pathname.includes('login.html') && 
+            !window.location.pathname.includes('signup.html')) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        // Initialize page-specific functionality
+        initPageSpecificFunctionality();
+    });
+    
+    function initPageSpecificFunctionality() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        switch(currentPage) {
+            case 'dashboard.html':
+                initDashboard();
+                break;
+            case 'tasks.html':
+                initTasks();
+                break;
+            case 'focus.html':
+                initFocus();
+                break;
+            case 'habits.html':
+                initHabits();
+                break;
+            case 'notes.html':
+                initNotes();
+                break;
+            case 'analytics.html':
+                initAnalytics();
+                break;
+            case 'profile.html':
+                initProfile();
+                break;
+            case 'settings.html':
+                initSettings();
+                break;
+            default:
+                // No specific initialization needed
+        }
+    }
+    
+    // Page-specific initialization functions
+    function initDashboard() {
+        // Dashboard specific initialization
+        console.log('Initializing dashboard...');
+    }
+    
+    function initTasks() {
+        // Tasks specific initialization
+        console.log('Initializing tasks...');
+    }
+    
+    function initFocus() {
+        // Focus specific initialization
+        console.log('Initializing focus...');
+    }
+    
+    function initHabits() {
+        // Habits specific initialization
+        console.log('Initializing habits...');
+    }
+    
+    function initNotes() {
+        // Notes specific initialization
+        console.log('Initializing notes...');
+    }
+    
+    function initAnalytics() {
+        // Analytics specific initialization
+        console.log('Initializing analytics...');
+    }
+    
+    function initProfile() {
+        // Profile specific initialization
+        const user = window.authManager?.getCurrentUser();
+        if (!user) return;
+        
+        // Populate profile form
+        document.getElementById('profile-name')?.value = user.displayName || '';
+        document.getElementById('profile-email')?.value = user.email || '';
+        
+        // Set up profile update form
+        const profileForm = document.getElementById('profile-form');
+        if (profileForm) {
+            profileForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('profile-name').value;
+                const email = document.getElementById('profile-email').value;
+                
+                try {
+                    await window.authManager.updateUserProfile({
+                        displayName: name
+                    });
+                    
+                    alert('Profile updated successfully!');
+                } catch (error) {
+                    alert('Error updating profile: ' + error);
+                }
+            });
+        }
+    }
+    
+    function initSettings() {
+        // Settings specific initialization
+        console.log('Initializing settings...');
+    }
+</script>
+</body>
+</html>

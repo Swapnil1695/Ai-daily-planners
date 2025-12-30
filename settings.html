@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Daily Planner - Settings</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9991916363065932" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>AI Daily Planner</h1>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="tasks.html"><i class="fas fa-tasks"></i> Tasks</a></li>
+                <li><a href="focus.html"><i class="fas fa-bullseye"></i> Focus</a></li>
+                <li><a href="habits.html"><i class="fas fa-chart-line"></i> Habits</a></li>
+                <li><a href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a></li>
+                <li><a href="analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="premium.html"><i class="fas fa-crown"></i> Premium</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html" class="active"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            
+            <!-- Sidebar Ad -->
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+                <div class="ad-content">
+                    <i class="fas fa-ad"></i>
+                    <p>Customization Tools<br>Make the app work your way</p>
+                    <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h2><i class="fas fa-cog"></i> Settings</h2>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=3498db&color=fff" alt="User">
+                    <div>
+                        <h4>Alex Johnson</h4>
+                        <p>App Version: 2.4.1</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- General Settings -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-sliders-h"></i> General Settings</h3>
+                    <button class="btn" id="save-settings">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+                
+                <div class="settings-group">
+                    <h4><i class="fas fa-language"></i> Language & Region</h4>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Language</h5>
+                            <p>Select your preferred language</p>
+                        </div>
+                        <select style="padding: 8px 15px; border-radius: 8px; border: 1px solid #e0e6ed;">
+                            <option>English (US)</option>
+                            <option>English (UK)</option>
+                            <option>Spanish</option>
+                            <option>French</option>
+                            <option>German</option>
+                            <option>Japanese</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Date Format</h5>
+                            <p>How dates are displayed</p>
+                        </div>
+                        <select style="padding: 8px 15px; border-radius: 8px; border: 1px solid #e0e6ed;">
+                            <option>MM/DD/YYYY (US)</option>
+                            <option>DD/MM/YYYY (EU)</option>
+                            <option>YYYY-MM-DD (ISO)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Time Format</h5>
+                            <p>12-hour or 24-hour clock</p>
+                        </div>
+                        <select style="padding: 8px 15px; border-radius: 8px; border: 1px solid #e0e6ed;">
+                            <option>12-hour (AM/PM)</option>
+                            <option>24-hour</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="settings-group">
+                    <h4><i class="fas fa-palette"></i> Appearance</h4>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Theme</h5>
+                            <p>Light or dark mode</p>
+                        </div>
+                        <select style="padding: 8px 15px; border-radius: 8px; border: 1px solid #e0e6ed;">
+                            <option>Light</option>
+                            <option>Dark</option>
+                            <option>Auto (system default)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Accent Color</h5>
+                            <p>Primary color for buttons and highlights</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <div style="width: 30px; height: 30px; border-radius: 50%; background-color: #3498db; border: 2px solid #3498db; cursor: pointer;"></div>
+                            <div style="width: 30px; height: 30px; border-radius: 50%; background-color: #2ecc71; border: 2px solid #e0e6ed; cursor: pointer;"></div>
+                            <div style="width: 30px; height: 30px; border-radius: 50%; background-color: #9b59b6; border: 2px solid #e0e6ed; cursor: pointer;"></div>
+                            <div style="width: 30px; height: 30px; border-radius: 50%; background-color: #e74c3c; border: 2px solid #e0e6ed; cursor: pointer;"></div>
+                            <div style="width: 30px; height: 30px; border-radius: 50%; background-color: #f1c40f; border: 2px solid #e0e6ed; cursor: pointer;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Density</h5>
+                            <p>Spacing and size of UI elements</p>
+                        </div>
+                        <select style="padding: 8px 15px; border-radius: 8px; border: 1px solid #e0e6ed;">
+                            <option>Comfortable</option>
+                            <option>Compact</option>
+                            <option>Spacious</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notification Settings -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                </div>
+                
+                <div class="settings-group">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Task Reminders</h5>
+                            <p>Get notified about upcoming and overdue tasks</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Focus Session Alerts</h5>
+                            <p>Notifications when focus sessions start and end</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Habit Streak Notifications</h5>
+                            <p>Celebrate your habit streaks and milestones</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Weekly Summary</h5>
+                            <p>Receive a weekly productivity report every Sunday</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>AI Suggestions</h5>
+                            <p>Get personalized suggestions from AI</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Email Notifications</h5>
+                            <p>Receive notifications via email</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ads Section -->
+            <div class="ads-section">
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-ad"></i>
+                        <p>Upgrade to Premium<br>Remove ads and unlock advanced settings</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+                
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <div class="ad-content">
+                        <i class="fas fa-tools"></i>
+                        <p>Advanced Customization Tools<br>Fine-tune every aspect of your experience</p>
+                        <p><small>Ad ID: google.com, pub-9991916363065932</small></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI Configuration -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-robot"></i> AI Configuration</h3>
+                </div>
+                
+                <div class="settings-group">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>AI Schedule Generation</h5>
+                            <p>Allow AI to create and optimize your daily schedule</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Smart Task Prioritization</h5>
+                            <p>AI automatically prioritizes tasks based on urgency and importance</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Adaptive Focus Sessions</h5>
+                            <p>AI adjusts focus session length based on your energy patterns</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Predictive Analytics</h5>
+                            <p>AI predicts productivity patterns and provides insights</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="input-group" style="margin-top: 20px;">
+                        <label for="ai-aggressiveness"><i class="fas fa-sliders-h"></i> AI Aggressiveness</label>
+                        <p style="font-size: 14px; color: #7f8c8d; margin-bottom: 10px;">How proactive AI should be with suggestions and adjustments</p>
+                        <select id="ai-aggressiveness" style="padding: 12px 15px;">
+                            <option>Gentle (minimal changes)</option>
+                            <option>Balanced (recommended)</option>
+                            <option>Assertive (frequent optimizations)</option>
+                            <option>Aggressive (maximum automation)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data & Privacy -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-database"></i> Data & Privacy</h3>
+                </div>
+                
+                <div class="settings-group">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Data Backup</h5>
+                            <p>Automatically backup your data to cloud</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Usage Analytics</h5>
+                            <p>Share anonymous usage data to improve the app</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h5>Auto-delete Old Data</h5>
+                            <p>Automatically delete tasks older than 90 days</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; display: flex; gap: 15px;">
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-file-export"></i> Export All Data
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-trash-alt"></i> Clear Cache
+                    </button>
+                    <button class="btn" style="background-color: #3498db;">
+                        <i class="fas fa-sync"></i> Sync Now
+                    </button>
+                </div>
+            </div>
+            
+            <!-- About & Support -->
+            <div class="page-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-info-circle"></i> About & Support</h3>
+                </div>
+                
+                <div class="dashboard" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <div class="dashboard-card">
+                        <h4><i class="fas fa-info-circle"></i> About</h4>
+                        <p><strong>Version:</strong> 2.4.1 (Build 2103)</p>
+                        <p><strong>Last Updated:</strong> May 10, 2023</p>
+                        <p><strong>License:</strong> Premium Subscription</p>
+                        <p><strong>Data Usage:</strong> 124 MB</p>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h4><i class="fas fa-question-circle"></i> Support</h4>
+                        <p><strong>Help Center:</strong> <a href="#">View Articles</a></p>
+                        <p><strong>Contact Support:</strong> <a href="#">Send Message</a></p>
+                        <p><strong>Community:</strong> <a href="#">Join Forum</a></p>
+                        <p><strong>Feedback:</strong> <a href="#">Submit Feedback</a></p>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h4><i class="fas fa-shield-alt"></i> Legal</h4>
+                        <p><a href="#">Privacy Policy</a></p>
+                        <p><a href="#">Terms of Service</a></p>
+                        <p><a href="#">Cookie Policy</a></p>
+                        <p><a href="#">Data Processing Agreement</a></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>AI Daily Planner &copy; 2023 | Using Ad ID: google.com, pub-9991916363065932, DIRECT, f08c47fec0942fa0</p>
+                <p>Customize your experience and configure app settings.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Save settings functionality
+        document.getElementById('save-settings').addEventListener('click', function() {
+            // In a real app, this would save settings to backend
+            // For demo, we'll just show a message
+            alert('Settings saved successfully!');
+            
+            // Visual feedback
+            this.innerHTML = '<i class="fas fa-check"></i> Saved';
+            this.classList.add('btn-success');
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+                this.classList.remove('btn-success');
+            }, 2000);
+        });
+        
+        // Color picker functionality
+        const colorDots = document.querySelectorAll('.setting-item .fa-palette').parentElement.parentElement.querySelectorAll('div[style*="background-color"]');
+        colorDots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                // Remove border from all dots
+                colorDots.forEach(d => d.style.border = '2px solid #e0e6ed');
+                
+                // Add border to selected dot
+                this.style.border = '2px solid #3498db';
+                
+                // In a real app, this would change the theme color
+                const color = this.style.backgroundColor;
+                alert(`Accent color changed to ${color}. In a real app, this would update the theme.`);
+            });
+        });
+        
+        // Export data
+        const exportButton = document.querySelector('.btn .fa-file-export').parentElement;
+        exportButton.addEventListener('click', function() {
+            alert('Exporting all your data... You will receive an email when it\'s ready for download.');
+        });
+        
+        // Clear cache
+        const clearCacheButton = document.querySelector('.btn .fa-trash-alt').parentElement;
+        clearCacheButton.addEventListener('click', function() {
+            if (confirm('Clear all cached data? This will not affect your saved tasks or settings.')) {
+                alert('Cache cleared successfully!');
+            }
+        });
+        
+        // Sync now
+        const syncButton = document.querySelector('.btn .fa-sync').parentElement;
+        syncButton.addEventListener('click', function() {
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Syncing...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-sync"></i> Sync Now';
+                this.disabled = false;
+                alert('Sync completed successfully!');
+            }, 1500);
+        });
+    </script>
+<!-- Add these scripts in order -->
+<script src="auth-manager.js"></script>
+<script src="common-header.js"></script>
+<script src="navigation.js"></script>
+
+<script>
+    // Initialize page-specific functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check authentication state
+        const user = window.authManager?.getCurrentUser();
+        
+        if (!user && !window.location.pathname.includes('index.html') && 
+            !window.location.pathname.includes('login.html') && 
+            !window.location.pathname.includes('signup.html')) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        // Initialize page-specific functionality
+        initPageSpecificFunctionality();
+    });
+    
+    function initPageSpecificFunctionality() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        switch(currentPage) {
+            case 'dashboard.html':
+                initDashboard();
+                break;
+            case 'tasks.html':
+                initTasks();
+                break;
+            case 'focus.html':
+                initFocus();
+                break;
+            case 'habits.html':
+                initHabits();
+                break;
+            case 'notes.html':
+                initNotes();
+                break;
+            case 'analytics.html':
+                initAnalytics();
+                break;
+            case 'profile.html':
+                initProfile();
+                break;
+            case 'settings.html':
+                initSettings();
+                break;
+            default:
+                // No specific initialization needed
+        }
+    }
+    
+    // Page-specific initialization functions
+    function initDashboard() {
+        // Dashboard specific initialization
+        console.log('Initializing dashboard...');
+    }
+    
+    function initTasks() {
+        // Tasks specific initialization
+        console.log('Initializing tasks...');
+    }
+    
+    function initFocus() {
+        // Focus specific initialization
+        console.log('Initializing focus...');
+    }
+    
+    function initHabits() {
+        // Habits specific initialization
+        console.log('Initializing habits...');
+    }
+    
+    function initNotes() {
+        // Notes specific initialization
+        console.log('Initializing notes...');
+    }
+    
+    function initAnalytics() {
+        // Analytics specific initialization
+        console.log('Initializing analytics...');
+    }
+    
+    function initProfile() {
+        // Profile specific initialization
+        const user = window.authManager?.getCurrentUser();
+        if (!user) return;
+        
+        // Populate profile form
+        document.getElementById('profile-name')?.value = user.displayName || '';
+        document.getElementById('profile-email')?.value = user.email || '';
+        
+        // Set up profile update form
+        const profileForm = document.getElementById('profile-form');
+        if (profileForm) {
+            profileForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('profile-name').value;
+                const email = document.getElementById('profile-email').value;
+                
+                try {
+                    await window.authManager.updateUserProfile({
+                        displayName: name
+                    });
+                    
+                    alert('Profile updated successfully!');
+                } catch (error) {
+                    alert('Error updating profile: ' + error);
+                }
+            });
+        }
+    }
+    
+    function initSettings() {
+        // Settings specific initialization
+        console.log('Initializing settings...');
+    }
+</script>
+</body>
+</html>

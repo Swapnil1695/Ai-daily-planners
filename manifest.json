@@ -1,0 +1,62 @@
+{
+  "short_name": "DailyWork AI",
+  "name": "DailyWork AI - Free AI Productivity Platform",
+  "description": "AI-powered productivity platform with ad-supported premium features. Plan your day, manage tasks, build habits, and boost focus.",
+  "icons": [
+    {
+      "src": "/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/splash.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait",
+  "categories": ["productivity", "business", "education"],
+  "screenshots": [
+    {
+      "src": "/screenshots/dashboard.png",
+      "type": "image/png",
+      "sizes": "1280x720"
+    },
+    {
+      "src": "/screenshots/planner.png",
+      "type": "image/png",
+      "sizes": "1280x720"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Task",
+      "short_name": "Task",
+      "description": "Add a new task",
+      "url": "/tasks?new=true",
+      "icons": [{ "src": "/icon-task.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Start Focus",
+      "short_name": "Focus",
+      "description": "Start focus timer",
+      "url": "/focus?start=true",
+      "icons": [{ "src": "/icon-focus.png", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

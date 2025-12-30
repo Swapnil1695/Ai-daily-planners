@@ -1,0 +1,19 @@
+# robots.txt for AI Daily Planner
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+
+# AdSense specific crawlers
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+# Sitemap
+Sitemap: https://yourdomain.com/sitemap.xml

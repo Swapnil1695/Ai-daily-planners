@@ -1,0 +1,29 @@
+
+### **4. Upload to GitHub - Step by Step**
+
+#### **Method A: Using GitHub Desktop (Easiest)**
+
+1. **Install GitHub Desktop**: [desktop.github.com](https://desktop.github.com/)
+
+2. **Create new repository in GitHub Desktop**:
+   - Click "File" → "New repository"
+   - Name: `ai-daily-planner`
+   - Local path: Select your project folder
+   - Click "Create repository"
+
+3. **Commit changes**:
+   - Write commit message: "Initial commit - AI Daily Planner"
+   - Click "Commit to main"
+
+4. **Publish to GitHub**:
+   - Click "Publish repository"
+   - Keep "Keep this code private" unchecked (for public repo)
+   - Click "Publish repository"
+
+#### **Method B: Using Command Line**
+
+1. **Open terminal in your project folder**
+
+2. **Initialize git repository**:
+```bash
+git init

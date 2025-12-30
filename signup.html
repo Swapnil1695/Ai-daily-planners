@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Daily Planner - Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .login-box {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-logo i {
+            font-size: 48px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .login-logo h1 {
+            color: #2c3e50;
+            font-size: 28px;
+        }
+        
+        .login-logo p {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .login-form .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .login-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+        }
+        
+        .signup-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .success-message {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .password-strength {
+            height: 5px;
+            background-color: #eee;
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s, background-color 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-logo">
+                <i class="fas fa-robot"></i>
+                <h1>Create Account</h1>
+                <p>Start your AI-powered productivity journey</p>
+            </div>
+            
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+            
+            <!-- Signup Form -->
+            <form id="signup-form" class="login-form">
+                <div class="input-group">
+                    <label for="signup-name"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="signup-name" placeholder="John Doe" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="signup-email"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="signup-email" placeholder="you@example.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="signup-password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a strong password" required>
+                    <div class="password-strength">
+                        <div class="strength-bar" id="password-strength-bar"></div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="confirm-password"><i class="fas fa-lock"></i> Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+            
+            <div class="signup-link">
+                Already have an account? <a href="login.html">Sign in</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAUKRuFgZIAO8MaWlMv32s55EOWAVRmB2o",
+            authDomain: "ai-web-9392e.firebaseapp.com",
+            projectId: "ai-web-9392e",
+            storageBucket: "ai-web-9392e.firebasestorage.app",
+            messagingSenderId: "116138523194",
+            appId: "1:116138523194:web:f37a49f16c7c26a8245303",
+            measurementId: "G-TFH9TTVM9T"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Password strength indicator
+        document.getElementById('signup-password').addEventListener('input', function() {
+            const password = this.value;
+            const strengthBar = document.getElementById('password-strength-bar');
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            let width = strength * 25;
+            let color = '#e74c3c';
+            
+            if (strength === 1) color = '#e74c3c';
+            else if (strength === 2) color = '#f39c12';
+            else if (strength === 3) color = '#3498db';
+            else if (strength >= 4) color = '#2ecc71';
+            
+            strengthBar.style.width = width + '%';
+            strengthBar.style.backgroundColor = color;
+        });
+
+        // Signup form submission
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const errorDiv = document.getElementById('error-message');
+            const successDiv = document.getElementById('success-message');
+            
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            // Validation
+            if (password !== confirmPassword) {
+                errorDiv.textContent = 'Passwords do not match!';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            if (password.length < 6) {
+                errorDiv.textContent = 'Password must be at least 6 characters long!';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            try {
+                // Create user in Firebase Auth
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+                
+                // Update user profile with name
+                await user.updateProfile({
+                    displayName: name
+                });
+                
+                // Create user document in Firestore
+                await db.collection('users').doc(user.uid).set({
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: name,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    plan: 'free',
+                    preferences: {
+                        theme: 'light',
+                        notifications: true,
+                        dailyReminders: true
+                    }
+                });
+                
+                // Create initial data collections
+                await createInitialData(user.uid);
+                
+                successDiv.textContent = 'Account created successfully! Redirecting to dashboard...';
+                successDiv.style.display = 'block';
+                
+                // Store user data in localStorage
+                localStorage.setItem('user', JSON.stringify({
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: name
+                }));
+                
+                // Redirect to dashboard after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 2000);
+                
+            } catch (error) {
+                let errorMessage = 'Signup failed. ';
+                
+                switch(error.code) {
+                    case 'auth/email-already-in-use':
+                        errorMessage += 'Email is already registered.';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage += 'Invalid email address.';
+                        break;
+                    case 'auth/weak-password':
+                        errorMessage += 'Password is too weak.';
+                        break;
+                    default:
+                        errorMessage += error.message;
+                }
+                
+                errorDiv.textContent = errorMessage;
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // Create initial data for new user
+        async function createInitialData(uid) {
+            const today = new Date().toISOString().split('T')[0];
+            
+            // Create default tasks
+            const defaultTasks = [
+                {
+                    title: 'Morning Routine',
+                    description: 'Wake up, exercise, and have breakfast',
+                    completed: false,
+                    priority: 'medium',
+                    category: 'personal',
+                    dueDate: today,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                },
+                {
+                    title: 'Check Emails',
+                    description: 'Respond to important emails',
+                    completed: false,
+                    priority: 'high',
+                    category: 'work',
+                    dueDate: today,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                },
+                {
+                    title: 'Plan Your Day',
+                    description: 'Review and plan daily tasks',
+                    completed: true,
+                    priority: 'high',
+                    category: 'planning',
+                    dueDate: today,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }
+            ];
+            
+            for (const task of defaultTasks) {
+                await db.collection('users').doc(uid).collection('tasks').add(task);
+            }
+            
+            // Create default habits
+            const defaultHabits = [
+                {
+                    name: 'Morning Exercise',
+                    description: '30 minutes of exercise',
+                    frequency: 'daily',
+                    streak: 0,
+                    bestStreak: 0,
+                    completedToday: false,
+                    category: 'health',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                },
+                {
+                    name: 'Evening Reading',
+                    description: 'Read for 30 minutes before bed',
+                    frequency: 'daily',
+                    streak: 0,
+                    bestStreak: 0,
+                    completedToday: false,
+                    category: 'learning',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }
+            ];
+            
+            for (const habit of defaultHabits) {
+                await db.collection('users').doc(uid).collection('habits').add(habit);
+            }
+            
+            // Create welcome note
+            await db.collection('users').doc(uid).collection('notes').add({
+                title: 'Welcome to AI Daily Planner!',
+                content: 'This is your first note. You can edit or delete it. Start by adding your tasks, habits, and notes to get the most out of this AI-powered productivity tool.',
+                category: 'welcome',
+                tags: ['welcome', 'getting-started'],
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            console.log('Initial data created for user:', uid);
+        }
+    </script>
+</body>
+</html>
