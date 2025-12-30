@@ -1,0 +1,115 @@
+name: AdSense Verification Helper
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Check Required Files
+      run: |
+        echo "Checking required files for AdSense..."
+        required_files=("ads.txt" "robots.txt" "sitemap.xml" ".nojekyll" "privacy.html" "terms.html")
+        missing_files=()
+        
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            missing_files+=("$file")
+          fi
+        done
+        
+        if [ ${#missing_files[@]} -eq 0 ]; then
+          echo "✅ All required files present"
+        else
+          echo "❌ Missing files: ${missing_files[*]}"
+          exit 1
+        fi
+    
+    - name: Check AdSense Meta Tags
+      run: |
+        echo "Checking AdSense meta tags in HTML files..."
+        
+        # Check index.html
+        if grep -q "google-adsense-account" index.html; then
+          echo "✅ AdSense meta tag found in index.html"
+        else
+          echo "❌ AdSense meta tag NOT found in index.html"
+          exit 1
+        fi
+        
+        # Check at least 5 HTML files have AdSense script
+        count=$(find . -name "*.html" -type f -exec grep -l "adsbygoogle" {} \; | wc -l)
+        if [ $count -ge 5 ]; then
+          echo "✅ AdSense script found in $count HTML files"
+        else
+          echo "❌ AdSense script should be in more HTML files"
+          exit 1
+        fi
+    
+    - name: Generate Site Report
+      run: |
+        echo "=== AdSense Site Verification Report ==="
+        echo "Site URL: https://${{ github.repository_owner }}.github.io/ai-daily-planner/"
+        echo "Repository: ${{ github.repository }}"
+        echo "Last Updated: $(date)"
+        echo ""
+        echo "=== File Check ==="
+        echo "Total HTML files: $(find . -name "*.html" -type f | wc -l)"
+        echo "Total CSS files: $(find . -name "*.css" -type f | wc -l)"
+        echo "Total JS files: $(find . -name "*.js" -type f | wc -l)"
+        echo ""
+        echo "=== AdSense Status ==="
+        echo "Publisher ID: ca-pub-9991916363065932"
+        
+    - name: Create Verification Summary
+      run: |
+        echo "Creating verification summary..."
+        cat > verification-summary.md << EOF
+        # AdSense Verification Summary
+        
+        ## Site Information
+        - **URL**: https://${{ github.repository_owner }}.github.io/ai-daily-planner/
+        - **Owner**: ${{ github.repository_owner }}
+        - **Last Check**: $(date)
+        
+        ## Required Files Status
+        - ✅ ads.txt - Present
+        - ✅ robots.txt - Present
+        - ✅ sitemap.xml - Present
+        - ✅ .nojekyll - Present
+        - ✅ privacy.html - Present
+        - ✅ terms.html - Present
+        
+        ## AdSense Implementation
+        - **Publisher ID**: ca-pub-9991916363065932
+        - **Meta Tag**: Present in HTML files
+        - **Script**: Loaded on pages
+        
+        ## Next Steps for AdSense Approval:
+        1. Submit to Google Search Console
+        2. Wait 24-48 hours
+        3. Submit to AdSense
+        4. Use HTML tag verification method
+        
+        ## Test Links:
+        - [Homepage](https://${{ github.repository_owner }}.github.io/ai-daily-planner/)
+        - [Privacy Policy](https://${{ github.repository_owner }}.github.io/ai-daily-planner/privacy.html)
+        - [Terms](https://${{ github.repository_owner }}.github.io/ai-daily-planner/terms.html)
+        - [robots.txt](https://${{ github.repository_owner }}.github.io/ai-daily-planner/robots.txt)
+        - [sitemap.xml](https://${{ github.repository_owner }}.github.io/ai-daily-planner/sitemap.xml)
+        
+        EOF
+        
+        cat verification-summary.md
+    
+    - name: Upload Verification Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: adsense-verification-report
+        path: verification-summary.md
